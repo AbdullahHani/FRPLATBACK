@@ -15,6 +15,7 @@ const routes = [
     name:'Login',
     component: () => import("@/views/login")
   },
+
   {
     path: '/seller',
     name: 'Complete Profile',
@@ -36,7 +37,7 @@ const routes = [
     component: () => import("@/Layouts/DashboardLayout"),
     children : [
       {
-      path: '',
+      path: '/',
       name:'page',
       component: ()=> import('@/views/Portfolios/Create.vue')
       }
@@ -78,6 +79,16 @@ const routes = [
         path: 'profilesetting',
         name: 'Profile Setting',
         component:()=> import('@/views/Profile/Account.vue')
+      },
+      {
+        path:'security',
+        name:'Security',
+        component: () => import('@/views/Profile/Security.vue')
+      }
+      {
+        path:'billing',
+        name:'Billing',
+        component: () => import('@/views/Profile/Billing.vue')
       }
     ] 
   }, {
