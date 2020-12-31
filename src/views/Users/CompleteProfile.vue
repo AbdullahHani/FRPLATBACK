@@ -1,0 +1,443 @@
+<template>
+  <div>
+    <div class="container-fluid">
+      <nav
+        class="navbar navbar-expand-lg navbar-light mx-auto w-100 text-center"
+      >
+        <a class="navbar-brand text-blue" href="#">
+          <img src="@/assets/images/others/logo.png" class="w-50" alt="Texenn" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link navbar-link" href="#">Gigs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navbar-link" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navbar-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navbar-link" href="#">Messages</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navbar-link" href="#">Orders</a>
+            </li>
+            <li class="nav-item">
+              <img
+                class="rounded-circle w-50"
+                src="@/assets/images/others/Ellipse 27.png"
+                alt=""
+              />
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <hr class="border-blue m-0" />
+
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-md-10 mt-0 mx-auto">
+            <b-tabs v-model="tabIndex" content-class="mt-3" class="custom-bullet">
+              <b-tab active>
+                <template #title>
+                  <p>
+                    <span class="custom-bullet selected">1</span>
+                    Personal Info
+                  </p>
+                </template>
+                <form>
+                  <div class="form-group">
+                    <label
+                      class="label-large"
+                      for="name"
+                      style="font-size: 20px;"
+                    >
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control custom-light-bg py-0"
+                      id="suggestions"
+                      style="width: 400px;"
+                    />
+                    <br />
+                    <label class="label-large" style="font-size: 20px;">
+                      Upload Profile Picture
+                      <button style="border: none; margin-left: 155px;">
+                        <img src="@/assets/images/others/add-file.png" />
+                      </button>
+                    </label>
+                    <label
+                      class="label-large"
+                      for="name"
+                      style="font-size: 20px;"
+                    >
+                      Full Name
+                    </label>
+
+                    <textarea
+                      name="project"
+                      class="form-control custom-light-bg py-0"
+                      id="projectdescription"
+                      cols="30"
+                      rows="5"
+                      style="width: 530px;"
+                    ></textarea>
+                    <br />
+                    <label
+                      class="label-large"
+                      for="name"
+                      style="font-size: 20px;"
+                    >
+                      Language
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control custom-light-bg py-0"
+                      id="suggestions"
+                      style="width: 400px;"
+                    />
+                    <br />
+
+                    <div class="col-md-11 ml-2 mt-2 mx-auto">
+                      <b-button
+                        @click="tabIndex++"
+                        class="btn btn-primary bg-darkblue"
+                        style="width: 120px; margin-left: -60px;"
+                      >
+                        Continue
+                      </b-button>
+                      <a class="ml-3" style="color: darkblue;" href="#">
+                        <strong>Back</strong>
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </b-tab>
+              <b-tab>
+                <template #title>
+                  <p>
+                    <span class="custom-bullet selected">2</span>
+                    Professional Info
+                  </p>
+                </template>
+                <form>
+                  <div class="form-group">
+                    <label
+                      class="label-large"
+                      for="name"
+                      style="font-size: 20px;"
+                    >
+                      Your Occupation
+                    </label>
+                    <a style="color: darkblue; margin-left: 175px;" href="#">
+                      + Add New
+                    </a>
+                    <input
+                      type="text"
+                      class="form-control custom-light-bg py-0"
+                      id="suggestions"
+                      style="width: 400px;"
+                    />
+                    <br />
+                    <label
+                      class="label-large"
+                      for="name"
+                      style="font-size: 20px;"
+                    >
+                      Skills
+                    </label>
+                    <div class="row ml-1">
+                      <input
+                        type="text"
+                        class="form-control custom-light-bg py-0"
+                        id="suggestions"
+                        placeholder="Add Skills"
+                        style="width: 150px;"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Experience Level"
+                        class="form-control ml-2 custom-light-bg py-0"
+                        id="suggestions"
+                        style="width: 150px;"
+                      />
+                      <br />
+                    </div>
+                    <br />
+                    <label
+                      class="label-large"
+                      for="name"
+                      style="font-size: 20px;"
+                    >
+                      Education
+                    </label>
+                    <div class="row ml-1">
+                      <input
+                        type="text"
+                        class="form-control custom-light-bg py-0"
+                        id="suggestions"
+                        placeholder="Country"
+                        style="width: 150px;"
+                      />
+                      <input
+                        type="text"
+                        placeholder="College"
+                        class="form-control ml-2 custom-light-bg py-0"
+                        id="suggestions"
+                        style="width: 150px;"
+                      />
+                      <br />
+                    </div>
+                    <br />
+                    <label
+                      class="label-large"
+                      for="name"
+                      style="font-size: 20px;"
+                    >
+                      Certification
+                    </label>
+                    <div class="row ml-1">
+                      <input
+                        type="text"
+                        class="form-control custom-light-bg py-0"
+                        id="suggestions"
+                        placeholder="Certified In"
+                        style="width: 150px;"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Certified From"
+                        class="form-control ml-2 custom-light-bg py-0"
+                        id="suggestions"
+                        style="width: 150px;"
+                      />
+                      <br />
+                      <input
+                        type="text"
+                        placeholder="Year"
+                        class="form-control ml-2 custom-light-bg py-0"
+                        id="suggestions"
+                        style="width: 150px;"
+                      />
+                      <br />
+                    </div>
+                    <br />
+
+                    <div class="col-md-11 ml-2 mt-2 mx-auto">
+                      <b-button
+                        @click="tabIndex++"
+                        class="btn btn-primary bg-darkblue"
+                        style="width: 120px; margin-left: -60px;"
+                      >
+                        Continue
+                      </b-button>
+                      <b-button @click="tabIndex--" class="ml-3" style="color: darkblue;">
+                        <strong>Back</strong>
+                      </b-button>
+                    </div>
+                  </div>
+                </form>
+              </b-tab>
+              <b-tab>
+                <template #title>
+                  <p>
+                    <span class="custom-bullet selected">3</span>
+                    Linked Accounts
+                  </p>
+                </template>
+                <div class="container mb-5">
+                  <div class="row">
+                    <div class="col-md-10 mt-4 mx-auto">
+                      <h3 class="display-7 head">
+                        <strong>Linked Account</strong>
+                      </h3>
+                      <h4 class="display-7 head">
+                        Our first impression matters ! Create a new Profile and
+                        Start earning now from the crowd here.
+                      </h4>
+                      <hr class="border-blue m-0 mt-3" />
+                      <h4 class="display-7 head mt-3">
+                        <strong>Your Social Media Account</strong>
+                      </h4>
+                    </div>
+                  </div>
+
+                  <ul class="col-md-10 mt-2 mx-auto" style="list-style: none;">
+                    <li>
+                      <i class="fab fa-google-plus-g"></i>
+                      Google
+                    </li>
+                    <li>
+                      <i class="fab fa-facebook"></i>
+                      Facebook
+                    </li>
+                    <li>
+                      <i class="fab fa-linkedin"></i>
+                      Linked In
+                    </li>
+                  </ul>
+
+                  <div class="col-md-10 mt-5 pl-5 ml-5">
+                    <b-button
+                      @click="tabIndex++"
+                      class="btn btn-primary bg-darkblue"
+                      style="width: 120px; margin-left: -60px;"
+                    >
+                      Continue
+                    </b-button>
+                    <b-button @click="tabIndex--" class="ml-3" style="color: darkblue;">
+                      <strong>Back</strong>
+                    </b-button>
+                  </div>
+                </div>
+              </b-tab>
+              <b-tab>
+                <template #title>
+                  <p>
+                    <span class="custom-bullet selected">4</span>
+                    Account Security
+                  </p>
+                </template>
+                <div
+                  class="container w-100 col-lg-9"
+                  style="background-color: white; border: 1px solid #ced4da;"
+                >
+                  <div
+                    class="row mr-5 mt-5"
+                    style="justify-content: center; width: auto;"
+                  >
+                    <img src="" />
+                  </div>
+                  <div
+                    class="progress mt-5 w-50"
+                    style="margin-left: 220px; border: 1px solid black;"
+                  >
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 25%;"
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
+                      26%
+                    </div>
+                  </div>
+                  <h4 class="display-7 head mt-5">
+                    Our first impression matters ! Create a new Profile and
+                    Start earning now from the crowd here.
+                  </h4>
+
+                  <label
+                    class="label-large mt-2"
+                    style="font-size: 20px; font-weight: bolder;"
+                  >
+                    Please complete the following steps
+                  </label>
+
+                  <ul>
+                    <li>Please complete the following</li>
+                    <li>Please complete the following</li>
+                    <li>Please complete the following</li>
+                  </ul>
+
+                  <div class="col-md-10 mt-5 pl-5 ml-5">
+                    <button
+                      type="submit"
+                      class="btn btn-primary bg-darkblue"
+                      style="
+                        width: 120px;
+                        justify-content: space-around;
+                        margin-left: -60px;
+                      "
+                    >
+                      Edit Profile
+                    </button>
+                  </div>
+                  <br />
+                  <br />
+                  <div class="container mb-5" style="width: 100%">
+                    <div class="row">
+                      <div class="col-md-10 mt-4 mx-auto">
+                        <h3 class="display-7 head">
+                          <strong>Account Security</strong>
+                        </h3>
+                        <h4 class="display-7 head">
+                          Our first impression matters ! Create a new Profile
+                          and Start earning now from the crowd here.
+                        </h4>
+
+                        <div class="col-md-10 mt-5 pl-5 ml-2">
+                          <button
+                            @click="() => {
+                                $router.push('/gigs/create')
+                            }"
+                            class="btn btn-primary bg-darkblue"
+                            style="width: 120px; margin-left: -60px;"
+                          >
+                            Continue
+                          </button>
+                          <a class="ml-3" style="color: darkblue;" href="#">
+                            <strong>Back</strong>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </b-tab>
+            </b-tabs>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center no-gutters border-blue text-grey pt-3">
+        <div class="col-md-4 mt-2">
+          <p class="mb-0">Copyright © 2020</p>
+          <p class="mb-0">Powered by AMSUS Technologies</p>
+          <p>Privacy Policy</p>
+        </div>
+        <div class="col-md-4 mt-2">
+          <p class="">Our Mailing Address</p>
+          <p>Contact Details</p>
+        </div>
+        <div class="col-md-4 p-3 rounded-icon mt-2">
+          <img class="mx-1" src="img\Group 23.png" alt="" />
+          <img class="mx-1" src="img\Group 22.png" alt="" />
+          <img class="mx-1" src="img\Group 25.png" alt="" />
+          <img class="mx-1" src="img\Group 24.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      tabIndex: 1
+    }
+  }
+}
+</script>
+
+<style scoped>
+.custom-bullet {
+    border-radius: 0.8em;
+    margin-left: 50px;
+}
+</style>
