@@ -1,52 +1,6 @@
 <template>
   <div>
     <div class="container-fluid">
-      <nav
-        class="navbar navbar-expand-lg navbar-light mx-auto w-100 text-center"
-      >
-        <a class="navbar-brand text-blue" href="#">
-          <img src="@/assets/images/others/logo.png" class="w-50" alt="Texenn" />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link navbar-link" href="#">Gigs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link navbar-link" href="#">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link navbar-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link navbar-link" href="#">Messages</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link navbar-link" href="#">Orders</a>
-            </li>
-            <li class="nav-item">
-              <img
-                class="rounded-circle w-50"
-                src="@/assets/images/others/Ellipse 27.png"
-                alt=""
-              />
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <hr class="border-blue m-0" />
-
       <div class="container mb-5">
         <div class="row">
           <div class="col-md-10 mt-0 mx-auto">
