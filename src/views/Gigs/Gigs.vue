@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div style="text-align: left;">
     <div class="container-fluid">
-
       <div class="container mb-5">
         <div class="row">
           <div class="col-md-10 mt-5 mx-auto">
@@ -45,7 +44,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-10" style="background-color: rgb(243, 248, 252);">
+        <div class="card-background">
+       <div class="col-md-10">
           <div class="row">
             <div class="col-md-10" style="margin-left: 12%;">
               <div class="forteen" style="margin-left: 120px;">
@@ -73,7 +73,7 @@
                 <input class="" type="checkbox" value="" id="defaultCheck1" />
                 <label class="" for="defaultCheck1">
                   <img
-                    style="width: 80px; height: 45px;"
+                    style="width: 80px; height: 45px; margin-left: 10px;"
                     src="@/assets/images/others/capture.png"
                   />
                 </label>
@@ -85,7 +85,7 @@
                 <input class="" type="checkbox" value="" id="defaultCheck1" />
                 <label class="" for="defaultCheck1">
                   <img
-                    style="width: 80px; height: 45px;"
+                    style="width: 80px; height: 45px; margin-left: 10px;"
                     src="@/assets/images/others/capture.png"
                   />
                 </label>
@@ -96,7 +96,7 @@
                 <input class="" type="checkbox" value="" id="defaultCheck1" />
                 <label class="" for="defaultCheck1">
                   <img
-                    style="width: 80px; height: 45px;"
+                    style="width: 80px; height: 45px; margin-left: 10px;"
                     src="@/assets/images/others/capture.png"
                   />
                 </label>
@@ -108,7 +108,7 @@
                 <input class="" type="checkbox" value="" id="defaultCheck1" />
                 <label class="" for="defaultCheck1">
                   <img
-                    style="width: 80px; height: 45px;"
+                    style="width: 80px; height: 45px; margin-left: 10px;"
                     src="@/assets/images/others/capture.png"
                   />
                 </label>
@@ -119,7 +119,7 @@
                 <input class="" type="checkbox" value="" id="defaultCheck1" />
                 <label class="" for="defaultCheck1">
                   <img
-                    style="width: 80px; height: 45px;"
+                    style="width: 80px; height: 45px; margin-left: 10px;"
                     src="@/assets/images/others/capture.png"
                   />
                 </label>
@@ -130,6 +130,7 @@
             <br />
             <br />
           </ul>
+        </div>
         </div>
       </div>
     </div>

@@ -130,6 +130,19 @@ const routes = [
       },
     ]
   },
+  {
+    path: '/graphicDesign',
+    name: 'Dashboard Layout',
+    redirect: '/graphicDesign',
+    component: () => import('@/Layouts/DashboardLayout/index.vue'),
+    children: [
+      {
+        path: '',
+        name: 'GraphicDesign',
+        component: () => import('@/views/Dashboard.vue')
+      },
+    ]
+  },
 ]
 
 const router = new VueRouter({
