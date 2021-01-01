@@ -19,7 +19,7 @@
                 </b-button>
               </div>
             </div>
-            <div class="forteen" style="margin-left: 89px;">
+            <div class="forteen" style="margin-left: -100px;">
               <ul style="display: inline-flex; list-style: none;">
                 <li class="">
                   <a class="nav-link text-blue" style="color: black;" href="#">
@@ -47,7 +47,7 @@
         <div class="card-background">
        <div class="col-md-10">
             <div class="col-md-12" style="margin-left: 12%;">
-              <div class="forteen " style="margin-left: 120px; display: inline-flex; width: 70%;">
+              <div class="forteen " style="margin-left: 400px; display: inline-flex; width: 70%;">
                 <ul class="nav " style=" ">
                   <li class="nav-item ml-5" style="font-size: 14px;">
                     Impression

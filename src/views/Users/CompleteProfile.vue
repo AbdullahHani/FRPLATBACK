@@ -268,8 +268,7 @@
                   </p>
                 </template>
                 <div
-                  class="container w-100 col-lg-9"
-                  style="background-color: #f0f4f8; border: 1px solid #ced4da;"
+                  class="container card-background mt-4"
                 >
                   <div
                     class="row mr-5 mt-5"
