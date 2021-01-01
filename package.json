@@ -11,6 +11,11 @@
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.21.1",
     "core-js": "^3.6.5",
+    "jquery": "^3.5.1",
+    "loader-runner": "^4.1.0",
+    "portal-vue": "^2.1.7",
+    "sass": "^1.32.0",
+    "sass-loader": "^10.1.0",
     "vue": "^2.6.12",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
@@ -24,8 +29,6 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.32.0",
-    "sass-loader": "^10.1.0",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.44.2"
   }

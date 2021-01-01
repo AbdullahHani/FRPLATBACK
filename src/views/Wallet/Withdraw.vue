@@ -1,8 +1,6 @@
 <template>
-<div>
+  <div>
     <div class="container-fluid">
-      
-
       <label
         class="label-large ml-5 mt-2"
         style="font-size: 20px; font-weight: bolder"
@@ -15,11 +13,7 @@
         >
           <div
             class="card-background"
-            style="
-              width: 100%;
-              background-color: white;
-              text-align: center;
-            "
+            style="width: 100%; background-color: white; text-align: center"
           >
             <div class="ml-auto">
               <p class="pt-2">Net income</p>
@@ -33,11 +27,7 @@
         >
           <div
             class="card-background"
-            style="
-              width: 100%;
-              background-color: white;
-              text-align: center;
-            "
+            style="width: 100%; background-color: white; text-align: center"
           >
             <div class="ml-auto">
               <p class="pt-2">Withdrawn</p>
@@ -51,11 +41,7 @@
         >
           <div
             class="card-background"
-            style="
-              width: 100%;
-              background-color: white;
-              text-align: center;
-            "
+            style="width: 100%; background-color: white; text-align: center"
           >
             <div class="ml-auto">
               <p class="pt-2">Pending Clearances</p>
@@ -69,11 +55,7 @@
         >
           <div
             class="card-background"
-            style="
-              width: 100%;
-              background-color: white;
-              text-align: center;
-            "
+            style="width: 100%; background-color: white; text-align: center"
           >
             <div class="ml-auto">
               <p class="pt-2">Available for Withdrawal</p>
@@ -82,7 +64,7 @@
           </div>
         </div>
       </div>
-      <hr/>
+      <hr />
       <label
         class="label-large ml-5 mt-5"
         style="
@@ -104,7 +86,10 @@
 
       <div class="card-background mt-3">
         <div class="row ml-1">
-          <label class="label-large ml-5 mr-2" for="name" style="font-size: 20px"
+          <label
+            class="label-large ml-5 mr-2"
+            for="name"
+            style="font-size: 20px"
             >Show
           </label>
           <input
@@ -168,7 +153,7 @@
         </table>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>

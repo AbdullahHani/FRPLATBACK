@@ -102,4 +102,61 @@ input:focus {
     color: #000;
     font-size: 22px;
 }
+.field-wrapper-signup{
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.field-wrapper-signup input{
+    border-radius: 5px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    border: solid 1px #262525;
+    padding: 15px;
+    width: 100%;
+    outline: none;
+    background-color: transparent;
+}
+
+.field-wrapper-signup .field-placeholder{
+    font-size: 16px;
+    position: absolute;
+    /* background: #fff; */
+    bottom: 17px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #000;
+    left: 8px;
+    padding: 0 20px;
+    -webkit-transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+    transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+    z-index: 10;
+
+    text-align: left;
+    border-radius: 5px;
+    /* width: 100%; */
+}
+
+/* .field-wrapper .field-placeholder span{
+    padding: 0px 8px;
+} */
+
+
+.field-wrapper-signup input:not([disabled]):focus~.field-placeholder,
+.field-wrapper-signup.hasValue input:not([disabled])~.field-placeholder
+{
+    /* color:#1A73E8; */
+    color: #000;
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    margin-left: 50px;
+    font-weight: 700;
+    /* background-image: linear-gradient(111deg, #9996ec 0%, #0616fb 84%); */
+    background-color: #fff;
+}
+
+.field-wrapper-signup input:not([disabled]):focus~.field-placeholder,
+.field-wrapper-signup.hasValue input:not([disabled])~.field-placeholder
+{
+    -webkit-transform: scale(.75) translateY(-28px) translateX(-60px);
+    transform: scale(.75) translateY(-28px) translateX(-60px);
+}
 </style>

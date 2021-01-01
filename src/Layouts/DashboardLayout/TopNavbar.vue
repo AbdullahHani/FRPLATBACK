@@ -11,7 +11,7 @@
                         <router-link class="nav-link navbar-link text-center"  to="/messages">Messages</router-link>
                     </li> -->
                     <li class="nav-item "  >
-                        <router-link class="nav-link navbar-link text-center"  to="/graphicDesign">Porfolio</router-link>
+                        <router-link class="nav-link navbar-link text-center"  to="/portfolio">Porfolio</router-link>
                     </li>
                     <li class="nav-item "  >
                         <router-link class="nav-link navbar-link text-center"  to="/seller/complete">Complete Profile</router-link>

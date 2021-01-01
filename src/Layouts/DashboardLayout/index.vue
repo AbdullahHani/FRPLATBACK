@@ -2,7 +2,7 @@
     <div>
         <top-navbar />
         <div style="padding: 20px;">
-            <router-view />
+            <router-view :key="$route.name"/>
         </div>
         <dashboard-footer />
     </div>
@@ -10,8 +10,12 @@
 
 
 <script>
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import TopNavbar from './TopNavbar'
 import DashboardFooter from './DashboardFooter'
+
 export default {
     name:'DashboardLayout',
     components: {

@@ -5,31 +5,74 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+// const routes = [
+//   {
+//     path: '/messages',
+//     name: 'Dashboard Layout',
+//     redirect: '/messages',
+//     component: () => import('@/Layouts/DashboardLayout/index.vue'),
+//     children: [
+//       {
+//         path: '',
+//         name: 'Messages',
+//         component: () => import('@/views/Messages/index.vue')
+//       },
+//     ]
+//   },
+//   {
+//     path: '/graphicDesign',
+//     name: 'Dashboard Layout',
+//     redirect: '/graphicDesign',
+//     component: () => import('@/Layouts/DashboardLayout/index.vue'),
+//     children: [
+//       {
+//         path: '',
+//         name: 'GraphicDesign',
+//         component: () => import('@/views/Dashboard.vue')
+//       },
+//     ]
+//   },
+// ],
+
 const routes = [
   {
     path: '/',
+    name: 'Login',
     component: () => import('@/views/Users/Auth.vue')
   },
+  //Dashboard Layout
   {
-    path:'/',
-    name:'Login',
-    component: () => import("@/views/login")
+    path: '/',
+    name: 'Dashboard',
+    component: () => import("@/Layouts/DashboardLayout"),
+    children : [
+      {
+        path: '/getstarted',
+        name: 'Get Started',
+        component: () => import('@/views/Users/GetStarted.vue')
+      },
+      {
+        path: '/detail',
+        name: 'Texxens Overview',
+        component: () => import('@/views/Detail.vue')
+      }
+    ]
   },
-
+  // Seller's Routes for Profile Completion
   {
     path: '/seller',
-    name: 'Complete Profile',
+    name: 'Seller',
     redirect: '/seller/complete',
-
     component: () => import("@/Layouts/DashboardLayout"),
     children : [
       {
       path: 'complete',
-      name:'page',
+      name:'Complete Seller Profile',
       component: ()=> import('@/views/Users/CompleteProfile.vue')
       }
     ]
   },
+  //Seller Portfolio
   {
     path: '/portfolio',
     name: 'Portfolio',
@@ -37,41 +80,35 @@ const routes = [
     component: () => import("@/Layouts/DashboardLayout"),
     children : [
       {
-      path: '/',
-      name:'page',
+      path: '',
+      name:'Add Portfolio',
       component: ()=> import('@/views/Portfolios/Create.vue')
       }
     ]
   },
+  // Seller Gigs
   {
-    path: '/help&support',
-    name: 'Help and Support',
-    redirect: '/help&support',
-    component: () => import("@/Layouts/DashboardLayout"),
-    children : [
+    path: '/gigs',
+    name: 'Gigs',
+    redirect: '/gigs',
+    component: () => import('@/Layouts/DashboardLayout/index.vue'),
+    children: [
       {
-      path: '',
-      name:'Help and Support',
-      component: ()=> import('@/views/HelpandSupport/Create.vue')
-      }
+        path: '',
+        name: 'List of Gigs',
+        component: () => import('@/views/Gigs/Gigs.vue')
+      },
+      {
+        path: 'create',
+        name: 'Create Gig',
+        component: () => import('@/views/Gigs/CreateGig.vue')
+      },
     ]
   },
-  {
-    path: '/wallet',
-    name: 'Cash Withdraw',
-    redirect: '/wallet',
-    component: () => import("@/Layouts/DashboardLayout"),
-    children : [
-      {
-      path: 'withdraw',
-      name:'Cash Withdraw',
-      component: ()=> import('@/views/Wallet/Withdraw.vue')
-      }
-    ]
-  },
+  // User Profile
   {
     path:'/profile',
-    name: 'Profile Setting',
+    name: 'Profile',
     redirect: '/profile',
     component:()=> import("@/Layouts/DashboardLayout"),
     children : [
@@ -82,76 +119,42 @@ const routes = [
       },
       {
         path:'security',
-        name:'Security',
+        name:'Profile Security',
         component: () => import('@/views/Profile/Security.vue')
-      }
+      },
       {
         path:'billing',
-        name:'Billing',
+        name:'Profile Billing',
         component: () => import('@/views/Profile/Billing.vue')
       }
     ] 
-  }, {
-    path: '/',
-    component: () => import('@/views/Users/Auth.vue')
   },
+  //User Wallet
   {
-    path: '/getstarted',
-    name: 'Get Started',
-    component: () => import('@/views/Users/GetStarted.vue')
-  },
-  {
-    path: '/profile/complete',
-    name: 'Get Started',
-    component: () => import('@/views/Users/CompleteProfile.vue')
-  },
-  {
-    path: '/detail',
-    name: 'Detail',
-    component: () => import('@/views/Detail.vue')
-  },
-  {
-    path: '/gigs',
-    name: 'Dashboard Layout',
-    redirect: '/gigs',
-    component: () => import('@/Layouts/DashboardLayout/index.vue'),
-    children: [
+    path: '/wallet',
+    name: 'Wallet',
+    redirect: '/wallet',
+    component: () => import("@/Layouts/DashboardLayout"),
+    children : [
       {
-        path: '',
-        name: 'Gigs',
-        component: () => import('@/views/Gigs/Gigs.vue')
-      },
-      {
-        path: 'create',
-        name: 'Complete Profile',
-        component: () => import('@/views/Gigs/CreateGig.vue')
-      },
+      path: 'withdraw',
+      name:'Cash Withdraw',
+      component: ()=> import('@/views/Wallet/Withdraw.vue')
+      }
     ]
   },
+  //App Help and Support
   {
-    path: '/messages',
-    name: 'Dashboard Layout',
-    redirect: '/messages',
-    component: () => import('@/Layouts/DashboardLayout/index.vue'),
-    children: [
+    path: '/help&support',
+    name: 'Help and Support',
+    redirect: '/help&support',
+    component: () => import("@/Layouts/DashboardLayout"),
+    children : [
       {
-        path: '',
-        name: 'Messages',
-        component: () => import('@/views/Messages/index.vue')
-      },
-    ]
-  },
-  {
-    path: '/graphicDesign',
-    name: 'Dashboard Layout',
-    redirect: '/graphicDesign',
-    component: () => import('@/Layouts/DashboardLayout/index.vue'),
-    children: [
-      {
-        path: '',
-        name: 'GraphicDesign',
-        component: () => import('@/views/Dashboard.vue')
-      },
+      path: '',
+      name:'Request Support',
+      component: ()=> import('@/views/HelpandSupport/Create.vue')
+      }
     ]
   },
 ]
