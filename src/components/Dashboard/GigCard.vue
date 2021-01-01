@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="gig-card">
+  <div class="gig-card card-background" style="padding: 0;">
     <div style="width: 100%; height: 200px; overflow: hidden;">
       <img
         v-if="gig.img"
@@ -81,9 +81,7 @@ export default {
     width: 200px;
     // border: 1px solid #3a3b3b;
     margin: 10px;
-    margin-left: 100px;
     border-radius: 10px;
-    box-shadow: 0px 1.5px 3px 0px rgba(0, 0, 0, 0.4);
     background-color: #ffffff;
   }
   .seller-name {

@@ -98,7 +98,7 @@
               <button
                 @click="
                   () => {
-                    $router.push('/profile/complete');
+                    $router.push('/seller/complete');
                   }
                 "
                 type="submit"
