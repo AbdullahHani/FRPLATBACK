@@ -4,10 +4,26 @@
       <div class="row">
         <div class="col-md-3">
           <div class="sidenav">
-            <a href="#account">Account</a>
-            <a href="#security">Security</a>
-            <a href="#notifications">Notifications</a>
-            <a href="#billing" class="current">Billing Information</a>
+              <router-link
+                class="nav-link navbar-link text-left"
+                to="/profile/profilesetting"
+                >Account
+              </router-link>
+              <router-link
+                class="nav-link navbar-link text-left"
+                to="/profile/security"
+                >Security</router-link
+              >
+              <router-link
+                class="nav-link navbar-link text-left"
+                to="/profile/Notification"
+                >Notification</router-link
+              >
+              <router-link
+                class="nav-link navbar-link text-left"
+                to="/profile/Billing"
+                >Billing Information</router-link
+              >
           </div>
         </div>
         <div class="col-md-7">

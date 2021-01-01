@@ -124,6 +124,11 @@ const routes = [
         component: () => import('@/views/Profile/Security.vue')
       },
       {
+        path:'Notification',
+        name:'Profile Notification',
+        component: () => import('@/views/Profile/Notification.vue')
+      },
+      {
         path:'billing',
         name:'Profile Billing',
         component: () => import('@/views/Profile/Billing.vue')

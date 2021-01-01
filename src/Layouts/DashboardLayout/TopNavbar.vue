@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="custom-navbar">
          <nav class="navbar navbar-expand-lg navbar-light mx-auto w-100 text-center">
             <a class="navbar-brand text-blue" href="#"><img src="@/assets/images/others/Group 62.png" class="w-50" alt="Texenn"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,9 +30,7 @@
                     </li>
                 </ul>
             </div>
-
         </nav>
-        <hr class="border-blue m-0">
     </div>
 </template>
 
@@ -41,3 +39,13 @@ export default {
     name:'TopNavbar'
 }
 </script>
+
+<style scoped>
+.custom-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+}
+</style>

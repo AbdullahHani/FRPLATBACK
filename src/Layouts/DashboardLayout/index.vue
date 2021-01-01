@@ -1,9 +1,9 @@
 <template>
     <div>
-        <top-navbar />
-        <div style="padding: 20px;">
+        <div class="app-content">
             <router-view :key="$route.name"/>
         </div>
+        <top-navbar />
         <dashboard-footer />
     </div>
 </template>
@@ -25,3 +25,9 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.app-content {
+    margin-top: 100px !important;
+}
+</style>

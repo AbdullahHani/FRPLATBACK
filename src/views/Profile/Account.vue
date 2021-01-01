@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="text-align: left;">
     <div class="container">
       <div class="container">
         <div class="row">
@@ -20,7 +20,7 @@
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/security"
+                to="/profile/Notification"
                 >Notification</router-link
               >
               <router-link
@@ -47,9 +47,9 @@
                 </div>
                 <br /><br />
                 <label class="label-large" for="gigTitle"
-                  >Online Status <button class="clrbtn"></button>
+                  >Online Status <button class="notification-status-btn "></button>
                 </label>
-                <div class="dropdown btnnn">
+                <div class="dropdown btnnn ">
                   <button
                     class="btn btn-secondary dropdown-toggle"
                     type="button"
@@ -130,3 +130,14 @@ export default {
   name: "Account",
 };
 </script>
+
+<style scoped>
+.notification-status-btn{
+     border-radius: 20px;
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+    border: none;
+    background-color: lightgreen;
+}
+</style>
