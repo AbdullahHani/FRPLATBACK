@@ -1,10 +1,11 @@
 <template>
   <div>
     <div class="container-fluid">
-      <div class="container mb-5">
+      <div class="container mb-5 card-background">
         <div class="row">
           <div class="col-md-10 mt-0 mx-auto">
             <b-tabs v-model="tabIndex" content-class="mt-3" class="custom-bullet">
+              <b-progress :value="value" :max="max" show-progress animated></b-progress>
               <b-tab active>
                 <template #title>
                   <p>
@@ -13,7 +14,7 @@
                   </p>
                 </template>
                 <form>
-                  <div class="form-group">
+                  <div class="form-group"  style="text-align: left;">
                     <label
                       class="label-large"
                       for="name"
@@ -89,7 +90,7 @@
                   </p>
                 </template>
                 <form>
-                  <div class="form-group">
+                  <div class="form-group" style="text-align: left;">
                     <label
                       class="label-large"
                       for="name"
@@ -358,23 +359,6 @@
           </div>
         </div>
       </div>
-      <div class="row text-center no-gutters border-blue text-grey pt-3">
-        <div class="col-md-4 mt-2">
-          <p class="mb-0">Copyright © 2020</p>
-          <p class="mb-0">Powered by AMSUS Technologies</p>
-          <p>Privacy Policy</p>
-        </div>
-        <div class="col-md-4 mt-2">
-          <p class="">Our Mailing Address</p>
-          <p>Contact Details</p>
-        </div>
-        <div class="col-md-4 p-3 rounded-icon mt-2">
-          <img class="mx-1" src="img\Group 23.png" alt="" />
-          <img class="mx-1" src="img\Group 22.png" alt="" />
-          <img class="mx-1" src="img\Group 25.png" alt="" />
-          <img class="mx-1" src="img\Group 24.png" alt="" />
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -383,7 +367,9 @@
 export default {
   data() {
     return {
-      tabIndex: 1
+      tabIndex: 1,
+      value: 25,
+      max: 100
     }
   }
 }
