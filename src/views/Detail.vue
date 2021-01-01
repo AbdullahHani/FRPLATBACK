@@ -14,9 +14,9 @@
           </div>
 
           <div class="row">
-            <div class="col-lg-1 col-md-0 col-sm-0"></div>
+            <div class="col-lg-1"></div>
             <div class="col-lg-10 col-md-12 col-sm-12 row" style="flex-wrap: wrap">
-              <div class="col-lg-4 col-md-6 col-sm-0 mt-2">
+              <div class="col-lg-4 mt-2">
                 <div class="card-background" style="display: flex; padding: 10px;">
                   <img
                     class="m-3"
@@ -92,7 +92,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-1 col-md-0 col-sm-0"></div>
+            <div class="col-lg-1"></div>
 
             <div class="col-md-10 ml-5 mt-5 mx-auto">
               <button

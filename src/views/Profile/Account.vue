@@ -25,7 +25,7 @@
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/security"
+                to="/profile/Billing"
                 >Billing Information</router-link
               >
             </div>
