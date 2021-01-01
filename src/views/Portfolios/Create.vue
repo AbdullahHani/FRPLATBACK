@@ -64,6 +64,9 @@
 
             <div class="col-md-10 mt-5 pl-5 ml-5">
               <button
+                @click="() => {
+                  $router.push('/portfolio/pf')
+                }"
                 type="submit"
                 class="btn btn-primary bg-darkblue"
                 style="width: 120px; margin-left: -60px"

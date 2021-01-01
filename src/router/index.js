@@ -5,22 +5,6 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-// const routes = [
-//   {
-//     path: '/messages',
-//     name: 'Dashboard Layout',
-//     redirect: '/messages',
-//     component: () => import('@/Layouts/DashboardLayout/index.vue'),
-//     children: [
-//       {
-//         path: '',
-//         name: 'Messages',
-//         component: () => import('@/views/Messages/index.vue')
-//       },
-//     ]
-//   },
-// ],
-
 const routes = [
   {
     path: '/',
@@ -84,7 +68,12 @@ const routes = [
       path: '',
       name:'Add Portfolio',
       component: ()=> import('@/views/Portfolios/Create.vue')
-      }
+      },
+      {
+        path: 'pf',
+        name:'View Portfolio',
+        component: ()=> import('@/views/Portfolios/index.vue')
+        },
     ]
   },
   // Seller Gigs
