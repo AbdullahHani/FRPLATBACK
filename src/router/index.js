@@ -19,19 +19,6 @@ Vue.use(VueRouter)
 //       },
 //     ]
 //   },
-//   {
-//     path: '/graphicDesign',
-//     name: 'Dashboard Layout',
-//     redirect: '/graphicDesign',
-//     component: () => import('@/Layouts/DashboardLayout/index.vue'),
-//     children: [
-//       {
-//         path: '',
-//         name: 'GraphicDesign',
-//         component: () => import('@/views/Dashboard.vue')
-//       },
-//     ]
-//   },
 // ],
 
 const routes = [
@@ -39,6 +26,20 @@ const routes = [
     path: '/',
     name: 'Login',
     component: () => import('@/views/Users/Auth.vue')
+  },
+  // Dashboard View
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    redirect: '/dashboard',
+    component: () => import('@/Layouts/DashboardLayout/index.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Gigs List',
+        component: () => import('@/views/Dashboard.vue')
+      },
+    ]
   },
   //Dashboard Layout
   {

@@ -25,6 +25,9 @@
                       <li class="nav-item "  >
                         <router-link class="nav-link navbar-link text-center"  to="/profile/profilesetting">Profile Settings</router-link>
                     </li>
+                    <li class="nav-item "  >
+                        <router-link class="nav-link navbar-link text-center"  to="/dashboard">Dashboard</router-link>
+                    </li>
                 </ul>
             </div>
 
