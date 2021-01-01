@@ -1,16 +1,25 @@
 <template>
   <div style="padding: 10px;">
-    <p class="category-heading">Graphic Design and Illustration</p>
-    <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
-      <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
-    </div>
-    <p class="category-heading">Social Media Marketing Services</p>
-    <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
-      <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
-    </div>
-    <p class="category-heading">Graphic Design and Illustration Services</p>
-    <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
-      <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
+    <div class="row card-background">
+      <div class="col-lg-10">
+        <p class="category-heading">Graphic Design and Illustration</p>
+        <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
+          <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
+        </div>
+        <p class="category-heading">Social Media Marketing Services</p>
+        <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
+          <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
+        </div>
+        <p class="category-heading">Graphic Design and Illustration Services</p>
+        <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
+          <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="card-background">
+          List
+        </div>
+      </div>
     </div>
   </div>
 </template>
