@@ -31,17 +31,11 @@
                     <br />
                     <label class="label-large" style="font-size: 20px;">
                       Upload Profile Picture
-                      <button style="border: none; margin-left: 155px;">
+                      <button style="border: none; margin-left: 155px; background-color: white; outline: none;">
                         <img src="@/assets/images/others/add-file.png" />
                       </button>
                     </label>
-                    <label
-                      class="label-large"
-                      for="name"
-                      style="font-size: 20px;"
-                    >
-                      Full Name
-                    </label>
+                    
 
                     <textarea
                       name="project"

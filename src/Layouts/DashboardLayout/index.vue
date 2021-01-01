@@ -4,7 +4,7 @@
             <router-view :key="$route.name"/>
         </div>
         <top-navbar />
-        <dashboard-footer />
+        <dashboard-footer :style="$route.name === 'Profile Notification' ? {position: 'fixed', bottom: 0} : {}"/>
     </div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
     <div class="login-form">
         <form>
+          <img height="80" src="@/assets/images/others/Group 62.png" alt="">
             <div class="form-wrapper-outer">
                 <b-input-group class="field-wrapper-login">
                     <b-form-input type="email" v-model="login.email"></b-form-input>

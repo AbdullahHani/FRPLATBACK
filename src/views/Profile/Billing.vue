@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div style="text-align: left;">
     <div class="container">
       <div class="row">
-        <div class="col-md-3">
-          <div class="sidenav">
+        <div class="col-md-3 pt-4">
+          <div class="sidenavbar card-background">
               <router-link
                 class="nav-link navbar-link text-left"
                 to="/profile/profilesetting"
@@ -26,7 +26,7 @@
               >
           </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7 card-background mt-4">
           <form class="pt-5">
             <div class="form-group">
               <label for="fullname">Full Name</label>
@@ -91,15 +91,16 @@
               />
             </div>
 
-            <div class="form-group form-check row">
-              <label class="form-check-label text-blue" for="exampleCheck1"
-                >Send me Invoice via Email</label
-              >
+            <div class="form-group form-check row ">
+              
               <input
                 type="checkbox"
                 class="form-check-input tick"
                 id="exampleCheck1"
               />
+              <label class="form-check-label text-blue" for="exampleCheck1"
+                >Send me Invoice via Email</label
+              >
             </div>
             <div class="col-md-3 ml-auto">
               <button type="submit" class="btn btn-primary bg-darkblue">

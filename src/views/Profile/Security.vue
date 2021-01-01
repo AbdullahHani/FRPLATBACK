@@ -149,6 +149,9 @@ export default {
 .device-btn img{
   height: 40px;
 }
+
+</style>
+<style>
 .sidenavbar {
   position: fixed;
 }

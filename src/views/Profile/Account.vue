@@ -3,9 +3,9 @@
     <div class="container">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-3 pt-4">
             <div
-              class="sidenavbar"
+              class="sidenavbar card-background"
               style="display: grid; text-align: left; color: black"
             >
               <router-link
@@ -30,7 +30,7 @@
               >
             </div>
           </div>
-          <div class="col-md-7">
+          <div class="col-md-7 card-background mt-4">
             <h3 class="text-blue" style="font-size: 18px; padding-top: 40px">
               My Profile Setting
             </h3>

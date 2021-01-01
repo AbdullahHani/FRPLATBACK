@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-footer">
+  <div class="custom-footer w-100">
     <div
       class="row text-center no-gutters border-blue text-grey pt-1 mt-2"
       style="font-size: 12px"
