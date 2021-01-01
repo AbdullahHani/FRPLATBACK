@@ -124,7 +124,7 @@
               <button
                 @click="
                   () => {
-                    $router.push('/profile/complete');
+                    $router.push('/seller/complete');
                   }
                 "
                 type="submit"
@@ -137,39 +137,6 @@
                 <strong>Back</strong>
               </a>
             </div>
-          </div>
-        </div>
-        <div class="row text-center no-gutters border-blue text-grey pt-3 mt-5">
-          <div class="col-md-4 mt-2">
-            <p class="mb-0">Copyright © 2020</p>
-            <p class="mb-0">Powered by AMSUS Technologies</p>
-            <p>Privacy Policy</p>
-          </div>
-          <div class="col-md-4 mt-2">
-            <p class="">Our Mailing Address</p>
-            <p>Contact Details</p>
-          </div>
-          <div class="col-md-4 p-3 rounded-icon mt-2">
-            <img
-              class="mx-1"
-              src="@/assets/images/others/Group 23.png"
-              alt=""
-            />
-            <img
-              class="mx-1"
-              src="@/assets/images/others/Group 22.png"
-              alt=""
-            />
-            <img
-              class="mx-1"
-              src="@/assets/images/others/Group 25.png"
-              alt=""
-            />
-            <img
-              class="mx-1"
-              src="@/assets/images/others/Group 24.png"
-              alt=""
-            />
           </div>
         </div>
       </div>

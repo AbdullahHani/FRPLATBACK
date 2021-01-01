@@ -19,8 +19,8 @@
                 </b-button>
               </div>
             </div>
-            <div class="forteen" style="margin-left: -89px;">
-              <ul style="display: inline-flex;">
+            <div class="forteen" style="margin-left: 89px;">
+              <ul style="display: inline-flex; list-style: none;">
                 <li class="">
                   <a class="nav-link text-blue" style="color: black;" href="#">
                     <strong>Active</strong>
@@ -46,26 +46,24 @@
         </div>
         <div class="card-background">
        <div class="col-md-10">
-          <div class="row">
-            <div class="col-md-10" style="margin-left: 12%;">
-              <div class="forteen" style="margin-left: 120px;">
-                <ul style="display: inline-flex;">
-                  <li class="" style="font-size: 14px;">
+            <div class="col-md-12" style="margin-left: 12%;">
+              <div class="forteen " style="margin-left: 120px; display: inline-flex; width: 70%;">
+                <ul class="nav " style=" ">
+                  <li class="nav-item ml-5" style="font-size: 14px;">
                     Impression
                   </li>
-                  <li class="nav-item" style="font-size: 14px;">
+                  <li class="nav-item ml-5" style="font-size: 14px; ">
                     Clicks
                   </li>
-                  <li class="nav-item" style="font-size: 14px;">
+                  <li class="nav-item ml-5" style="font-size: 14px;">
                     Orders
                   </li>
-                  <li class="nav-item" style="font-size: 14px;">
+                  <li class="nav-item ml-5" style="font-size: 14px;">
                     Cancelation
                   </li>
                 </ul>
               </div>
             </div>
-          </div>
 
           <ul style="list-style: none; margin-left: -20px; width: 86.1%;">
             <li>

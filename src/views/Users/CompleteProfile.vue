@@ -269,28 +269,13 @@
                 </template>
                 <div
                   class="container w-100 col-lg-9"
-                  style="background-color: white; border: 1px solid #ced4da;"
+                  style="background-color: #f0f4f8; border: 1px solid #ced4da;"
                 >
                   <div
                     class="row mr-5 mt-5"
                     style="justify-content: center; width: auto;"
                   >
                     <img src="" />
-                  </div>
-                  <div
-                    class="progress mt-5 w-50"
-                    style="margin-left: 220px; border: 1px solid black;"
-                  >
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 25%;"
-                      aria-valuenow="25"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    >
-                      26%
-                    </div>
                   </div>
                   <h4 class="display-7 head mt-5">
                     Our first impression matters ! Create a new Profile and
