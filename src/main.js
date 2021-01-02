@@ -2,7 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from 'axios'
 // import jQuery from 'jquery'
+
+axios.defaults.baseURL = 'http://localhost:5000/api'
+// axios.defaults.baseURL = 'https://texxen-backend.herokuapp.com/api'
+// axios.defaults.baseURL = process.env.VUE_APP_BASE_API || 'https://texxen-backend.herokuapp.com/api'
+axios.defaults.headers.common.Authorization = localStorage.getItem('token')
 
 import PortalVue from 'portal-vue'
 
@@ -28,5 +34,8 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  beforeCreate() {
+    this.$store.commit('initializeStore')
+  },
   render: h => h(App)
 }).$mount('#app')

@@ -43,7 +43,7 @@
                     <div class="field-placeholder"><span>Referred By</span></div>
                 </b-input-group>
                 <div class="form-button">
-                    <button type="button" class="btn btn-primary" @click="register">Sign Up</button>
+                    <button type="submit" class="btn btn-primary" @click="register">Sign Up</button>
                 </div>
             </div>
         </form>
@@ -84,7 +84,7 @@ export default {
                 .then(
                     (response) => {
                         this.$store.commit('currentUser', response.data.data)
-                        this.$router.push('/dashboard')
+                        this.$router.push('/seller/complete')
                     }
                 )
         }
@@ -92,15 +92,18 @@ export default {
 }
 </script>
 
-<style scoped>
-input {
-    border-radius: 24px !important;
-    height: 50px;
+<style>
+.form-wrapper-outer{
+    padding: 40px;
+    /* border-radius: 8px; */
+    margin: auto;
+    width: 460px;
+    /* border: 1px solid #DADCE0; */
+    /* margin-top: 7%; */
 }
-input:focus {
-    background-color: transparent;
-    color: #000;
-    font-size: 22px;
+
+.form-button{
+    text-align: right;
 }
 .field-wrapper-signup{
     position: relative;

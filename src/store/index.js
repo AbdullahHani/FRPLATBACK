@@ -61,18 +61,9 @@ export default new Vuex.Store({
   },
   actions: {
     registerUser({ commit }, payload) {
-      console.log('Stores registertion')
       commit('Data', payload)
       return axios({
         url: '/users',
-        method: 'POST',
-        data: payload
-      })
-    },
-    createUser({ commit }, payload) {
-      commit('Data', payload)
-      return axios({
-        url: '/users/create',
         method: 'POST',
         data: payload
       })
@@ -156,8 +147,37 @@ export default new Vuex.Store({
         data: payload
       })
     },
-    updateSessionUser({ commit }, user) {
-      commit('currentUser', user)
+    updateUserPassword({ commit }, data) {
+      commit('Data', {})
+      return axios({
+        url: `/users/register/${data.token}`,
+        method: 'PATCH',
+        data: data.payload
+      })
+    },
+    socialLogin({ commit }, payload) {
+      commit('Data', {})
+      return axios({
+        url: '/users/sociallogin',
+        method: 'POST',
+        data: payload
+      })
+    },
+    addPersonalInfo({ commit }, data) {
+      commit('Data', {})
+      return axios({
+        url: `/users/personalinfo/${data.id}`,
+        method: 'PATCH',
+        data: data.payload
+      })
+    },
+    addProfessionalInfo({ commit }, data) {
+      commit('Data', {})
+      return axios({
+        url: `/users/professionalinfo/${data.id}`,
+        method: 'PATCH',
+        data: data.payload
+      })
     },
     createCategory({ commit }, payload) {
       commit('Data', payload)
@@ -179,36 +199,6 @@ export default new Vuex.Store({
       return axios({
         url: `/categories/${id}`,
         method: 'GET'
-      })
-    },
-    createRequest({ commit }, payload) {
-      commit('Data', payload)
-      return axios({
-        url: '/projects',
-        method: 'POST',
-        data: payload
-      })
-    },
-    getProjects({ commit }) {
-      commit('Data', {})
-      return axios({
-        url: '/projects',
-        method: 'GET'
-      })
-    },
-    getProject({ commit }, id) {
-      commit('Data', {})
-      return axios({
-        url: `/projects/${id}`,
-        method: 'GET'
-      })
-    },
-    updateProject({ commit }, data) {
-      commit('Data', {})
-      return axios({
-        url: `/projects/${data.id}`,
-        data: data.payload,
-        method: 'PATCH'
       })
     },
     createChat({ commit }, payload) {
@@ -241,63 +231,6 @@ export default new Vuex.Store({
         data: payload
       })
     },
-    uploadRequestFiles({ commit }, data) {
-      commit('Data', {})
-      return axios.post(`/upload/attachments/${data.id}`,
-        data.payload,
-        {
-          headers: {
-            'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-            'accept': 'application/json'
-          }
-        }
-      )
-    },
-    uploadResponseFiles({ commit }, data) {
-      commit('Data', {})
-      return axios.post(`/upload/responseattachments/${data.id}`,
-        data.payload,
-        {
-          headers: {
-            'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-            'accept': 'application/json'
-          }
-        }
-      )
-    },
-    uploadProfileImage({ commit }, data) {
-      commit('Data', {})
-      return axios.post(`/upload/profileimage`,
-        data,
-        {
-          headers: {
-            'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-            'accept': 'application/json'
-          }
-        }
-      )
-    },
-    dashboardData({ commit }) {
-      commit('Data', {})
-      return axios({
-        url: '/projects/dashboard',
-        method: 'GET'
-      })
-    },
-    getActivities({ commit }) {
-      commit('Data', {})
-      return axios({
-        url: '/activities',
-        method: 'GET'
-      })
-    },
-    getPermissions({ commit }) {
-      commit('Date', {})
-      return axios({
-        url: '/permissions',
-        method: 'GET'
-      })
-    },
     deleteUser({ commit }, id) {
       commit('Data', {})
       return axios({
@@ -305,52 +238,6 @@ export default new Vuex.Store({
         method: 'DELETE'
       })
     },
-    updateProjectStatus({ commit }, data) {
-      commit('Data', {})
-      return axios({
-        url: `/projects/status/${data.id}`,
-        method: 'PATCH',
-        data: data.payload
-      })
-    },
-    updateUserPassword({ commit }, data) {
-      commit('Data', {})
-      return axios({
-        url: `/users/register/${data.token}`,
-        method: 'PATCH',
-        data: data.payload
-      })
-    },
-    socialLogin({ commit }, payload) {
-      commit('Data', {})
-      return axios({
-        url: '/users/sociallogin',
-        method: 'POST',
-        data: payload
-      })
-    },
-    facebookLogin({ commit }, payload) {
-      commit('Data', {})
-      return axios({
-        url: '/users/facebooklogin',
-        method: 'POST',
-        data: payload
-      })
-    },
-    removeAttachment({ commit }, id) {
-      commit('Data', {})
-      return axios({
-        url: `/projects/attachment/${id}`,
-        method: 'DELETE'
-      })
-    },
-    getNotifications({ commit }) {
-      commit('Data', {})
-      return axios({
-        url: '/notifications',
-        method: 'GET'
-      })
-    }
   },
   modules: {}
-})
+  })

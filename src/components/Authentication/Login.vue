@@ -11,7 +11,14 @@
                     <div class="field-placeholder"><span>Password</span></div>
                 </b-input-group>
                 <div class="form-button">
-                    <router-link to="getStarted" type="button" class="btn btn-primary">Login</router-link>
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      @click="auth"
+                      style="padding: 10px 30px; font-weight: 800;"
+                    >
+                      Login
+                    </button>
                 </div>
             </div>
         </form>
@@ -40,7 +47,11 @@ export default {
   created() {
     if (this.user) {
       if(this.user.email) {
-       this.$router.push('/getStarted') 
+        if(this.user.profileCompleted){
+          this.$router.push('/gigs');
+        } else {
+          this.$router.push('/seller/complete');
+        } 
       }
     }
   },
@@ -51,13 +62,12 @@ export default {
         .then(
           (response)=> {
             const res = response.data.data;
-            localStorage.setItem('token', res.token);
-            localStorage.setItem('userId', res._id);
-            localStorage.setItem('user', JSON.stringify(res));
-            this.$store.commit('setUser', res);
+            this.$store.commit('currentUser', res);
             this.loading = false;
-            if(res.date){
-              this.$router.push('/getStarted');
+            if(res.profileCompleted){
+              this.$router.push('/gigs');
+            } else {
+              this.$router.push('/seller/complete');
             }
           }
         )

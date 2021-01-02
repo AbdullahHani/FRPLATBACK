@@ -3,17 +3,17 @@
     <div class="container-fluid">
       <div class="container mb-5 card-background">
         <div class="row">
-          <div class="col-md-10 mt-0 mx-auto">
+          <div class="col-md-12 mt-0 mx-auto">
             <b-tabs v-model="tabIndex" content-class="mt-3" class="custom-bullet">
-              <b-progress :value="value" :max="max" show-progress animated></b-progress>
-              <b-tab active>
+              <b-progress :value="user.profileCompleted" :max="max" show-progress animated></b-progress>
+              <b-tab>
                 <template #title>
                   <p>
                     <span class="custom-bullet selected">1</span>
                     Personal Info
                   </p>
                 </template>
-                <form>
+                <form @submit="updatePersonalInfo">
                   <div class="form-group"  style="text-align: left;">
                     <label
                       class="label-large"
@@ -25,63 +25,95 @@
                     <input
                       type="text"
                       class="form-control custom-light-bg py-0"
-                      id="suggestions"
-                      style="width: 400px;"
+                      v-model="personalInfo.name"
+                      required
                     />
                     <br />
-                    <label class="label-large" style="font-size: 20px;">
-                      Upload Profile Picture
-                      <button style="border: none; margin-left: 155px;">
-                        <img src="@/assets/images/others/add-file.png" />
+                    <div class="card-background" style="display: block; text-align: center;">
+                      <b-button
+                        @click="uploadImage"
+                        style="height: 150px; width: 150px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.25); background: none;">
+                        <img v-if="personalInfo.avatar" :src="personalInfo.avatar" alt="" height="120">
+                        <img v-else src="@/assets/images/others/add-file.png" alt="">
+                      </b-button>
+                      <p>Upload Image</p>
+                    </div>
+                    
+                    <div>
+                      <label
+                        class="label-large"
+                        for="name"
+                        style="font-size: 20px;"
+                      >
+                        Biography
+                      </label>
+                      <textarea
+                        name="project"
+                        class="form-control custom-light-bg py-0"
+                        cols="30"
+                        rows="5"
+                        v-model="personalInfo.description"
+                        required
+                      ></textarea>
+                    </div>
+                    <br />
+                    <label
+                      class="label-large"
+                      for="name"
+                      style="font-size: 20px;"
+                    >
+                      Languages
+                    </label>
+                    <div
+                      v-for="(language, index) in personalInfo.languages"
+                      :key="index"
+                      style="display: flex;"
+                      class="mt-2"
+                    >
+                      <input
+                        v-model="personalInfo.languages[index]"
+                        placeholder="Language..."
+                        type="text"
+                        class="form-control custom-light-bg py-0"
+                        required
+                      />
+                      <button
+                        v-if="index !== 0"
+                        style="border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 50%; padding: 0 15px; margin: 0 10px;"
+                        @click="removeLanguage(index)"
+                      >
+                        -
                       </button>
-                    </label>
-                    <label
-                      class="label-large"
-                      for="name"
-                      style="font-size: 20px;"
-                    >
-                      Full Name
-                    </label>
-
-                    <textarea
-                      name="project"
-                      class="form-control custom-light-bg py-0"
-                      id="projectdescription"
-                      cols="30"
-                      rows="5"
-                      style="width: 530px;"
-                    ></textarea>
-                    <br />
-                    <label
-                      class="label-large"
-                      for="name"
-                      style="font-size: 20px;"
-                    >
-                      Language
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control custom-light-bg py-0"
-                      id="suggestions"
-                      style="width: 400px;"
-                    />
-                    <br />
+                    </div>
+                    <div class="mt-2">
+                      <b-button
+                        class="btn btn-success"
+                        @click="addLanguage()"
+                      >
+                        Add Language
+                      </b-button>
+                    </div>
 
                     <div class="col-md-11 ml-2 mt-2 mx-auto">
                       <b-button
-                        @click="tabIndex++"
-                        class="btn btn-primary bg-darkblue"
-                        style="width: 120px; margin-left: -60px;"
+                        type="submit"
+                        class="btn btn-success bg-darkblue float-right"
+                        style="width: 120px;"
                       >
                         Continue
                       </b-button>
-                      <a class="ml-3" style="color: darkblue;" href="#">
-                        <strong>Back</strong>
-                      </a>
+                      <b-button
+                        @click="tabIndex--"
+                        class="btn btn- float-right"
+                        style="width: 120px;"
+                      >
+                        Back
+                      </b-button>
                     </div>
                   </div>
                 </form>
               </b-tab>
+              <!-- Professional Info -->
               <b-tab>
                 <template #title>
                   <p>
@@ -89,7 +121,7 @@
                     Professional Info
                   </p>
                 </template>
-                <form>
+                <form @submit="updateProfessionalInfo">
                   <div class="form-group" style="text-align: left;">
                     <label
                       class="label-large"
@@ -98,15 +130,36 @@
                     >
                       Your Occupation
                     </label>
-                    <a style="color: darkblue; margin-left: 175px;" href="#">
-                      + Add New
-                    </a>
-                    <input
-                      type="text"
-                      class="form-control custom-light-bg py-0"
-                      id="suggestions"
-                      style="width: 400px;"
-                    />
+                    <div
+                      v-for="(occupation, index) in professionalInfo.occupations"
+                      :key="index"
+                      class="row ml-1"
+                    >
+                      <input
+                        v-model="professionalInfo.occupations[index]"
+                        placeholder="Occupation..."
+                        type="text"
+                        class="form-control custom-light-bg mt-1 col-md-11"
+                        required
+                      />
+                      <div class="mt-1">
+                        <b-button
+                          v-if="index !== 0"
+                          style="border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 50%; padding: 4px 12px; margin: 0 10px;"
+                          @click="removeOccupation(index)"
+                        >
+                          -
+                        </b-button>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <b-button
+                        class="btn btn-success"
+                        @click="addOccupation()"
+                      >
+                        Add Occupation
+                      </b-button>
+                    </div>
                     <br />
                     <label
                       class="label-large"
@@ -115,24 +168,41 @@
                     >
                       Skills
                     </label>
-                    <div class="row ml-1">
+                    <div
+                      v-for="(skill, index) in professionalInfo.skills"
+                      :key="index"
+                      class="row ml-1">
                       <input
                         type="text"
-                        class="form-control custom-light-bg py-0"
-                        id="suggestions"
-                        placeholder="Add Skills"
-                        style="width: 150px;"
+                        class="form-control custom-light-bg mt-1 col-md-6"
+                        placeholder="Skill"
+                        v-model="professionalInfo.skills[index].skill"
+                        required
                       />
                       <input
                         type="text"
                         placeholder="Experience Level"
-                        class="form-control ml-2 custom-light-bg py-0"
-                        id="suggestions"
-                        style="width: 150px;"
+                        class="form-control custom-light-bg mt-1 col-md-5"
+                        v-model="professionalInfo.skills[index].experience"
+                        required
                       />
-                      <br />
+                      <div class="mt-1">
+                        <b-button
+                          v-if="index !== 0"
+                          style="border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 50%; padding: 4px 12px; margin: 0 10px;"
+                          @click="removeSkill(index)"
+                        >-</b-button>
+                      </div>
                     </div>
-                    <br />
+                    <div class="mt-2">
+                      <b-button
+                        class="btn btn-success"
+                        @click="addSkill()"
+                      >
+                        Add Skill
+                      </b-button>
+                    </div>
+                    <!-- Education -->
                     <label
                       class="label-large"
                       for="name"
@@ -140,24 +210,47 @@
                     >
                       Education
                     </label>
-                    <div class="row ml-1">
+                    <div
+                      v-for="(education, index) in professionalInfo.educations"
+                      :key="index"
+                      class="row ml-1">
                       <input
                         type="text"
-                        class="form-control custom-light-bg py-0"
-                        id="suggestions"
-                        placeholder="Country"
-                        style="width: 150px;"
+                        placeholder="Degree"
+                        class="form-control custom-light-bg mt-1 col-md-4"
+                        v-model="professionalInfo.educations[index].degree"
+                        required
                       />
                       <input
                         type="text"
                         placeholder="College"
-                        class="form-control ml-2 custom-light-bg py-0"
-                        id="suggestions"
-                        style="width: 150px;"
+                        class="form-control custom-light-bg mt-1 col-md-4"
+                        v-model="professionalInfo.educations[index].college"
+                        required
                       />
-                      <br />
+                      <input
+                        type="text"
+                        class="form-control custom-light-bg mt-1 col-md-3"
+                        placeholder="Country"
+                        v-model="professionalInfo.educations[index].country"
+                        required
+                      />
+                      <div class="mt-1">
+                        <b-button
+                          v-if="index !== 0"
+                          style="border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 50%; padding: 4px 12px; margin: 0 10px;"
+                          @click="removeEducation(index)"
+                        >-</b-button>
+                      </div>
                     </div>
-                    <br />
+                    <div class="mt-2">
+                      <b-button
+                        class="btn btn-success"
+                        @click="addEducation()"
+                      >
+                        Add Education
+                      </b-button>
+                    </div>
                     <label
                       class="label-large"
                       for="name"
@@ -165,36 +258,50 @@
                     >
                       Certification
                     </label>
-                    <div class="row ml-1">
+                    <div
+                      v-for="(certification, index) in professionalInfo.certifications"
+                      :key="index"
+                      class="row ml-1">
                       <input
                         type="text"
-                        class="form-control custom-light-bg py-0"
-                        id="suggestions"
-                        placeholder="Certified In"
-                        style="width: 150px;"
+                        placeholder="Certified In..."
+                        class="form-control custom-light-bg mt-1 col-md-4"
+                        v-model="professionalInfo.certifications[index].certifiedIn"
+                        required
                       />
                       <input
                         type="text"
-                        placeholder="Certified From"
-                        class="form-control ml-2 custom-light-bg py-0"
-                        id="suggestions"
-                        style="width: 150px;"
+                        placeholder="Certified From..."
+                        class="form-control custom-light-bg mt-1 col-md-5"
+                        v-model="professionalInfo.certifications[index].certifiedFrom"
+                        required
                       />
-                      <br />
                       <input
                         type="text"
-                        placeholder="Year"
-                        class="form-control ml-2 custom-light-bg py-0"
-                        id="suggestions"
-                        style="width: 150px;"
+                        class="form-control custom-light-bg mt-1 col-md-2"
+                        placeholder="Year..."
+                        v-model="professionalInfo.certifications[index].year"
+                        required
                       />
-                      <br />
+                      <div class="mt-1">
+                        <b-button
+                          v-if="index !== 0"
+                          style="border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 50%; padding: 4px 12px; margin: 0 10px;"
+                          @click="removeCertification(index)"
+                        >-</b-button>
+                      </div>
                     </div>
-                    <br />
-
+                    <div class="mt-2">
+                      <b-button
+                        class="btn btn-success"
+                        @click="addCertification()"
+                      >
+                        Add Certification
+                      </b-button>
+                    </div>
                     <div class="col-md-11 ml-2 mt-2 mx-auto">
                       <b-button
-                        @click="tabIndex++"
+                        type="submit"
                         class="btn btn-primary bg-darkblue"
                         style="width: 120px; margin-left: -60px;"
                       >
@@ -270,12 +377,6 @@
                 <div
                   class="container card-background mt-4"
                 >
-                  <div
-                    class="row mr-5 mt-5"
-                    style="justify-content: center; width: auto;"
-                  >
-                    <img src="" />
-                  </div>
                   <h4 class="display-7 head mt-5">
                     Our first impression matters ! Create a new Profile and
                     Start earning now from the crowd here.
@@ -288,7 +389,7 @@
                     Please complete the following steps
                   </label>
 
-                  <ul>
+                  <ul style="list-style: none;">
                     <li>Please complete the following</li>
                     <li>Please complete the following</li>
                     <li>Please complete the following</li>
@@ -348,12 +449,171 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      tabIndex: 1,
-      value: 25,
-      max: 100
+      tabIndex: 0,
+      max: 100,
+      personalInfo: {
+        name: '',
+        avatar: '',
+        description: '',
+        languages: ['']
+      },
+      professionalInfo: {
+        occupations: [''],
+        skills: [
+          {
+            skill: '',
+            experience: ''
+          }
+        ],
+        educations: [
+          {
+            country: '',
+            college: '',
+            degree: ''
+          }
+        ],
+        certifications: [
+          {
+            certifiedIn: '',
+            certifiedFrom: '',
+            year: ''
+          }
+        ],
+      }
+    }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  },
+  created() {
+    if (this.user.email) {
+      if (!this.user.personalInfo) {
+        this.tabIndex = 0
+        return
+      } else {
+        this.personalInfo = {
+          name: this.user.name,
+          avatar: this.user.avatar,
+          description: this.user.description,
+          languages: this.user.languages
+        }
+      }
+      if (!this.user.professionalInfo) {
+        this.tabIndex = 1
+        return
+      } else {
+        this.professionalInfo = {
+          occupations: this.user.occupations,
+          skills: this.user.skills,
+          educations: this.user.educations,
+          certifications: this.user.certifications || []
+        }
+      }
+      if (!this.user.linkedAccounts) {
+        this.tabIndex = 2
+        return
+      } else if (!this.user.accountSecurity) {
+        this.tabIndex = 3
+        return
+      }
+    }
+  },
+  methods: {
+    removeLanguage(key) {
+      this.personalInfo.languages = this.personalInfo.languages.filter((language, index) => index !== key)
+    },
+    addLanguage() {
+      this.personalInfo.languages.push('')
+    },
+    removeOccupation(key) {
+      this.professionalInfo.occupations = this.professionalInfo.occupations.filter((occupation, index) => index !== key)
+    },
+    addOccupation() {
+      this.professionalInfo.occupations.push('')
+    },
+    removeSkill(key) {
+      this.professionalInfo.skills = this.professionalInfo.skills.filter((skill, index) => index !== key)
+    },
+    addSkill() {
+      this.professionalInfo.skills.push({
+        skill: '',
+        experience: ''
+      })
+    },
+    removeEducation(key) {
+      this.professionalInfo.educations = this.professionalInfo.educations.filter((education, index) => index !== key)
+    },
+    addEducation() {
+      this.professionalInfo.educations.push({
+        country: '',
+        college: '',
+        degree: ''
+      })
+    },
+    removeCertification(key) {
+      this.professionalInfo.certifications = this.professionalInfo.certifications.filter((certification, index) => index !== key)
+    },
+    addCertification() {
+      this.professionalInfo.certifications.push({
+        certifiedIn: '',
+        certifiedFrom: '',
+        year: ''
+      })
+    },
+    updatePersonalInfo(e) {
+      e.preventDefault()
+      const data = {
+        id: this.user._id,
+        payload: this.personalInfo
+      }
+      this.$store.dispatch('addPersonalInfo', data)
+        .then(
+          (response) => {
+            this.$store.commit('currentUser', response.data.data)
+            this.tabIndex += 1
+          }
+        )
+    },
+    updateProfessionalInfo(e) {
+      e.preventDefault()
+      const data = {
+        id: this.user._id,
+        payload: this.professionalInfo
+      }
+      this.$store.dispatch('addProfessionalInfo', data)
+        .then(
+          (response) => {
+            this.$store.commit('currentUser', response.data.data)
+            this.tabIndex += 1
+          }
+        )
+    },
+    createCloudinaryWidget () {
+      const newWidget = window.cloudinary.createUploadWidget({
+        cloudName: 'storage96',
+        uploadPreset: 'texennavatar',
+        multiple: false,
+        maxFiles: 1,
+        cropping: true,
+        clientAllowedFormats: ['png', 'jpg', 'jpeg']
+      },
+      (error, result) => {
+        if (!error && result && result.event === 'success') {
+          this.personalInfo.avatar = result.info.secure_url
+        }
+      }
+      )
+      return newWidget
+    },
+    uploadImage () {
+      const cloudinaryWidget = this.createCloudinaryWidget()
+      cloudinaryWidget.open()
     }
   }
 }
