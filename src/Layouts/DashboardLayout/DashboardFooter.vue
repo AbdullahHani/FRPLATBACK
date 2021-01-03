@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="custom-footer w-100">
     <div
       class="row text-center no-gutters border-blue text-grey pt-1 mt-2"
       style="font-size: 12px"
@@ -28,3 +28,11 @@ export default {
   name: "DashboardFooter",
 };
 </script>
+
+<style scoped>
+.custom-footer {
+  background-color: #fff;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+}
+</style>

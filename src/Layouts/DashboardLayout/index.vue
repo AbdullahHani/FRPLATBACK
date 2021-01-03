@@ -1,10 +1,10 @@
 <template>
     <div>
-        <top-navbar />
-        <div style="padding: 20px;">
+        <div class="app-content">
             <router-view :key="$route.name"/>
         </div>
-        <dashboard-footer />
+        <top-navbar />
+        <dashboard-footer :style="$route.name === 'Profile Notification' ? {position: 'fixed', bottom: 0} : {}"/>
     </div>
 </template>
 
@@ -25,3 +25,9 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.app-content {
+    margin-top: 100px !important;
+}
+</style>

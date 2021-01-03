@@ -1,12 +1,7 @@
 <template>
   <div class="login-main-container">
     <nav class="navbar navbar-expand-lg">
-      <p>
-        <span>
-          <img src="" alt="">
-        </span> Sign In
-      </p>
-
+      
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <img src="" alt="">
       </div>

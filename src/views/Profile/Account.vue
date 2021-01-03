@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div style="text-align: left;">
     <div class="container">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-3 pt-4">
             <div
-              class="sidenavbar"
+              class="sidenavbar card-background"
               style="display: grid; text-align: left; color: black"
             >
               <router-link
@@ -20,17 +20,17 @@
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/security"
+                to="/profile/Notification"
                 >Notification</router-link
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/security"
+                to="/profile/Billing"
                 >Billing Information</router-link
               >
             </div>
           </div>
-          <div class="col-md-7">
+          <div class="col-md-7 card-background mt-4">
             <h3 class="text-blue" style="font-size: 18px; padding-top: 40px">
               My Profile Setting
             </h3>
@@ -47,9 +47,9 @@
                 </div>
                 <br /><br />
                 <label class="label-large" for="gigTitle"
-                  >Online Status <button class="clrbtn"></button>
+                  >Online Status <button class="notification-status-btn "></button>
                 </label>
-                <div class="dropdown btnnn">
+                <div class="dropdown btnnn ">
                   <button
                     class="btn btn-secondary dropdown-toggle"
                     type="button"
@@ -130,3 +130,14 @@ export default {
   name: "Account",
 };
 </script>
+
+<style scoped>
+.notification-status-btn{
+     border-radius: 20px;
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+    border: none;
+    background-color: lightgreen;
+}
+</style>

@@ -2,7 +2,7 @@
   <div>
     <div class="container-fluid">
       <div class="container mb-5">
-        <div class="row">
+        <div class="row card-background">
           <div class="col-md-10 mt-5 mx-auto">
             <h1 class="display-4 head">Create Gig</h1>
             <b-tabs v-model="tabIndex" content-class="mt-3">
