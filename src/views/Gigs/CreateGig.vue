@@ -1,28 +1,36 @@
 <template>
   <div>
-    <div class="container-fluid">
+    <div class="container-fluid" align="left">
       <div class="container mb-5">
-        <div class="row card-background">
-          <div class="col-md-10 mt-5 mx-auto">
+        <div class="row card-background" style="padding: 10px 20px;">
+          <div class="col-md-12 mt-5 mx-auto">
             <h1 class="display-4 head">Create Gig</h1>
             <b-tabs v-model="tabIndex" content-class="mt-3">
-              <b-tab active>
+              <b-tab>
                 <template #title>
                   <p>
                     <span class="custom-bullet selected">1</span>
                     Overview
                   </p>
                 </template>
-                <form>
+                <form @submit="addGig">
+                    <div class="card-background mb-4" style="display: block; text-align: center;">
+                      <b-button
+                        @click="uploadImage"
+                        style="height: 200px; width: 200px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.25); background: none;">
+                        <img v-if="gigForm.picture" :src="gigForm.picture" alt="" height="180">
+                        <img v-else src="@/assets/images/others/add-file.png" alt="">
+                      </b-button>
+                      <p>Upload Image</p>
+                    </div>
                   <div class="form-group">
                     <label class="label-large" for="gigTitle">Gig Title</label>
-                    <textarea
+                    <input
                       name="gig"
                       class="form-control custom-light-bg py-0"
-                      id="gigTitle"
-                      cols="30"
-                      rows="5"
-                    ></textarea>
+                      v-model="gigForm.title"
+                      required
+                    >
                   </div>
                   <div class="form-group row">
                     <div class="col-md-6">
@@ -30,12 +38,18 @@
                       <select
                         class="form-control custom-light-bg"
                         id="category"
+                        v-model="gigForm.category"
+                        @change="selectCategory"
+                        @select="selectCategory"
+                        required
                       >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option
+                          v-for="category in categories"
+                          :key="category.title"
+                          :value="category.title"
+                        >
+                          {{ category.title }}
+                        </option>
                       </select>
                     </div>
                     <div class="col-md-6">
@@ -45,12 +59,16 @@
                       <select
                         class="form-control custom-light-bg"
                         id="subcategory"
+                        v-model="gigForm.subCategory"
+                        required
                       >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option
+                          v-for="subCategory in getSubCategory()"
+                          :key="subCategory"
+                          :value="subCategory"
+                        >
+                          {{ subCategory }}
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -64,32 +82,59 @@
                       id="projectdescription"
                       cols="30"
                       rows="5"
+                      v-model="gigForm.description"
+                      required
                     ></textarea>
                   </div>
                   <div class="form-group">
                     <label class="label-large" for="tags">Tags</label>
-                    <select class="form-control custom-light-bg" id="tags">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
+                    <b-form-tags
+                      input-id="tags-separators"
+                      v-model="gigForm.tags"
+                      separator=" ,;"
+                      placeholder="Enter new tags separated by space, comma or semicolon"
+                      no-add-on-enter
+                      required
+                    ></b-form-tags>
                   </div>
                   <div class="form-group">
                     <label class="label-large" for="suggestions">
                       Suggestions
                     </label>
-                    <input
-                      type="password"
-                      class="form-control custom-light-bg py-0"
-                      id="suggestions"
-                    />
+                    <div
+                      v-for="(suggestion, index) in gigForm.suggestions"
+                      :key="index"
+                      style="display: flex;"
+                      class="mt-2"
+                    >
+                      <input
+                        v-model="gigForm.suggestions[index]"
+                        placeholder="Language..."
+                        type="text"
+                        class="form-control custom-light-bg py-0"
+                        required
+                      />
+                      <button
+                        v-if="index !== 0"
+                        style="border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 50%; padding: 0 15px; margin: 0 10px;"
+                        @click="removeSuggestion(index)"
+                      >
+                        -
+                      </button>
+                    </div>
+                    <div class="mt-2">
+                      <b-button
+                        class="btn btn-success"
+                        @click="addSuggestion()"
+                      >
+                        Add Suggestion
+                      </b-button>
+                    </div>
                   </div>
+                  <b-button type="submit" class="btn btn-success float-right">
+                    Continue
+                  </b-button>
                 </form>
-                <b-button @click="tabIndex++">
-                  Continue
-                </b-button>
               </b-tab>
               <b-tab>
                 <template #title>
@@ -98,297 +143,73 @@
                     Pricing
                   </p>
                 </template>
-                <div class="container mb-5">
-                  <div class="row">
-                    <div class="col-md-10 mt-5 mx-auto">
-                      <label
-                        class="label-large"
-                        style="font-size: 22px;"
-                        for="projectdescription"
-                      >
-                        Packages
-                      </label>
-
+                <form @submit="addPrice">
+                  <div class="row card-background">
+                    <div
+                      v-for="(pricing, index) in pricings"
+                      :key="pricing.title"
+                      class="col-md-4"
+                    >
                       <div
-                        class="danilo w-90"
-                        style="
-                          display: flex;
-                          justify-content: space-between;
-                          height: 650px;
-                        "
+                        class="card-background pb-2" style="padding: 0; margin: 5px; text-align: center;"
                       >
                         <div
-                          class="danil"
-                          style="
-                            width: 29%;
-                            border: 1px solid darkblue;
-                            background-color: white;
-                            border-radius: 5px;
-                            height: 650px;
-                          "
+                          style="width: 100%; height: 60px; background-image: linear-gradient(111deg, #9996ec 0%, #0616fb 84%); padding-top: 10px;"
                         >
-                          <h1
-                            style="
-                              background-color: darkblue;
-                              width: 100%;
-                              height: 50px;
-                              text-align: center;
-                              color: #fff;
-                              border-radius: 5px;
-                            "
-                          >
-                            Silver
-                          </h1>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
+                          <p style="font-size: 22px; color: #fff; text-align: center; font-weight: 800;">
+                            {{pricing.title}}
                           </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <div
-                            class="container"
-                            style="
-                              border: 1px solid #ced4da;
-                              border-radius: 5px;
-                              width: 90%;
-                              height: 120px;
-                            "
-                          ></div>
-                          <br />
-                          <input
-                            type="text  "
-                            class="form-control py-0"
-                            style="
-                              background-color: white;
-                              width: 90%;
-                              margin-left: 12px;
-                            "
-                            id="suggestions"
-                          />
-                          <br />
-                          <br />
-                          <h1
-                            style="
-                              background-color: darkblue;
-                              width: 100%;
-                              height: 50px;
-                              text-align: center;
-                              color: #fff;
-                              border-radius: 5px;
-                            "
-                          >
-                            $ 7.00
-                          </h1>
-                          <br />
-                          <button
-                            type="submit"
-                            class="btn btn-primary bg-darkblue"
-                            style="width: 100px; margin-left: 80px;"
-                          >
-                            Order
-                          </button>
                         </div>
-
-                        <div
-                          class="danil"
-                          style="
-                            width: 29%;
-                            border: 1px solid darkblue;
-                            background-color: white;
-                            border-radius: 5px;
-                            height: 650px;
-                          "
-                        >
-                          <h1
-                            style="
-                              background-color: darkblue;
-                              width: 100%;
-                              height: 50px;
-                              text-align: center;
-                              color: #fff;
-                              border-radius: 5px;
-                            "
-                          >
-                            Silver
-                          </h1>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <div
-                            class="container"
-                            style="
-                              border: 1px solid #ced4da;
-                              border-radius: 5px;
-                              width: 90%;
-                              height: 120px;
-                            "
-                          ></div>
-                          <br />
+                        <div class="form-group" align="center">
+                          <label class="label-large" for="gigTitle">Price</label>
                           <input
-                            type="text  "
-                            class="form-control py-0"
-                            style="
-                              background-color: white;
-                              width: 90%;
-                              margin-left: 12px;
-                            "
-                            id="suggestions"
-                          />
-                          <br />
-                          <br />
-                          <h1
-                            style="
-                              background-color: darkblue;
-                              width: 100%;
-                              height: 50px;
-                              text-align: center;
-                              color: #fff;
-                              border-radius: 5px;
-                            "
+                            name="price"
+                            type="number"
+                            class="form-control custom-light-bg py-0"
+                            style="width: 90%"
+                            v-model="pricings[index].price"
+                            required
                           >
-                            $ 7.00
-                          </h1>
-                          <br />
-                          <button
-                            type="submit"
-                            class="btn btn-primary bg-darkblue"
-                            style="width: 100px; margin-left: 80px;"
-                          >
-                            Order
-                          </button>
                         </div>
-
-                        <div
-                          class="danil"
-                          style="
-                            width: 29%;
-                            border: 1px solid darkblue;
-                            background-color: white;
-                            border-radius: 5px;
-                            height: 650px;
-                          "
-                        >
-                          <h1
-                            style="
-                              background-color: darkblue;
-                              width: 100%;
-                              height: 50px;
-                              text-align: center;
-                              color: #fff;
-                              border-radius: 5px;
-                            "
-                          >
-                            Silver
-                          </h1>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
-                          <p class="text-center">
-                            select the relevant subject
-                            <br />
-                          </p>
+                        <div class="form-group">
+                          <label class="label-large" for="suggestions">
+                            Services
+                          </label>
                           <div
-                            class="container"
-                            style="
-                              border: 1px solid #ced4da;
-                              border-radius: 5px;
-                              width: 90%;
-                              height: 120px;
-                            "
-                          ></div>
-                          <br />
-                          <input
-                            type="text  "
-                            class="form-control py-0"
-                            style="
-                              background-color: white;
-                              width: 90%;
-                              margin-left: 12px;
-                            "
-                            id="suggestions"
-                          />
-                          <br />
-                          <br />
-                          <h1
-                            style="
-                              background-color: darkblue;
-                              width: 100%;
-                              height: 50px;
-                              text-align: center;
-                              color: #fff;
-                              border-radius: 5px;
-                            "
+                            v-for="(service, serviceIndex) in pricings[index].services"
+                            :key="serviceIndex"
+                            style="display: flex;"
+                            class="row ml-1"
                           >
-                            $ 7.00
-                          </h1>
-                          <br />
-                          <button
-                            type="submit"
-                            class="btn btn-primary bg-darkblue"
-                            style="width: 100px; margin-left: 80px;"
-                          >
-                            Order
-                          </button>
+                            <input
+                              v-model="pricings[index].services[serviceIndex]"
+                              placeholder="Service..."
+                              type="text"
+                              class="form-control custom-light-bg mt-1 col-md-10 col-sm-9"
+                              required
+                            />
+                            <b-button
+                              v-if="serviceIndex !== 0"
+                              style="border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 50%; padding: 4px 15px;"
+                              @click="removeService(index, serviceIndex)"
+                            >
+                              -
+                            </b-button>
+                          </div>
+                          <div class="mt-2">
+                            <b-button
+                              class="btn btn-success"
+                              @click="addService(index)"
+                            >
+                              Add Service
+                            </b-button>
+                          </div>
                         </div>
                       </div>
-
-                      <button
-                        @click="() => {
-                                $router.push('/gigs')
-                            }"
-                        type="submit"
-                        class="btn mt-5 float-right btn-primary bg-darkblue"
-                        style="width: 180px; margin-left: -60px;"
-                      >
-                        Apply & Save
-                      </button>
                     </div>
                   </div>
-                </div>
+                  <b-button type="submit" class="btn btn-info float-right mt-2">Add Pricing & Continue</b-button>
+                </form>
               </b-tab>
             </b-tabs>
           </div>
@@ -399,10 +220,127 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      tabIndex: 1
+      gigId: '',
+      tabIndex: 1,
+      selectedCategory: {},
+      gigForm: {
+        title: '',
+        category: '',
+        subcategory: '',
+        picture: '',
+        description: '',
+        tags: [],
+        suggestions: []
+      },
+      categories: [],
+      pricings: [
+        {
+          title: 'Silver',
+          services: [''],
+          price: 0
+        },
+        {
+          title: 'Gold',
+          services: [''],
+          price: 0
+        },
+        {
+          title: 'Premium',
+          services: [''],
+          price: 0
+        }
+      ]
+    }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  },
+  created() {
+    this.$store.dispatch('getCategories')
+      .then(
+        (response) => {
+          this.categories = response.data.data
+        }
+      )
+  },
+  methods: {
+    selectCategory() {
+      const categories = this.categories.filter(category => category.title === this.gigForm.category)
+      this.selectedCategory = categories[0]
+    },
+    getSubCategory() {
+      // return ['Hi', 'Hello', 'How']
+      return this.selectedCategory ? this.selectedCategory.subCategories : []
+    },
+    removeSuggestion(key) {
+      this.gigForm.suggestions = this.gigForm.suggestions.filter((suggestion, index) => index !== key)
+    },
+    addSuggestion() {
+      this.gigForm.suggestions.push('')
+    },
+    removeService(index, serviceIndex) {
+      this.pricings[index].services = this.pricings[index].services.filter((service, key) => serviceIndex !== key)
+    },
+    addService(index) {
+      this.pricings[index].services.push('')
+    },
+    addGig(e) {
+      e.preventDefault()
+      this.$store.dispatch('createGig', this.gigForm)
+        .then(
+          (response) => {
+            this.gigId = response.data.data._id
+            this.tabIndex = 1
+          }
+        )
+    },
+    addPrice(e) {
+      e.preventDefault()
+      if (!this.gigId) {
+        this.tabIndex = 0
+        return
+      }
+      const data = {
+        id: this.gigId,
+        payload: {
+          pricings: this.pricings
+        }
+      }
+      this.$store.dispatch('addPricingToGig', data)
+        .then(
+          (response) => {
+            if (response) {
+              this.$router.push('/gigs')
+            }
+          }
+        )
+    },
+    createCloudinaryWidget () {
+      const newWidget = window.cloudinary.createUploadWidget({
+        cloudName: 'storage96',
+        uploadPreset: 'texxengigspicture',
+        multiple: false,
+        maxFiles: 1,
+        cropping: true,
+        clientAllowedFormats: ['png', 'jpg', 'jpeg']
+      },
+      (error, result) => {
+        if (!error && result && result.event === 'success') {
+          this.gigForm.picture = result.info.secure_url
+        }
+      }
+      )
+      return newWidget
+    },
+    uploadImage () {
+      const cloudinaryWidget = this.createCloudinaryWidget()
+      cloudinaryWidget.open()
     }
   }
 }

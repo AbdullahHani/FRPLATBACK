@@ -33,8 +33,6 @@
               <input
                 type="email"
                 class="form-control custom-blue-bg py-0"
-                id="fullname"
-                aria-describedby="emailHelp"
               />
             </div>
             <div class="form-group">
@@ -42,7 +40,6 @@
               <input
                 type="password"
                 class="form-control custom-blue-bg py-0"
-                id="companyName"
               />
             </div>
             <div class="form-group">
@@ -50,8 +47,6 @@
               <input
                 type="email"
                 class="form-control custom-blue-bg py-0"
-                id="country"
-                aria-describedby="emailHelp"
               />
             </div>
             <div class="form-group">
@@ -59,7 +54,6 @@
               <input
                 type="email"
                 class="form-control custom-blue-bg py-0"
-                id="region"
                 aria-describedby="emailHelp"
               />
             </div>
@@ -68,7 +62,6 @@
               <input
                 type="email"
                 class="form-control custom-blue-bg py-0"
-                id="address"
                 aria-describedby="emailHelp"
               />
             </div>
@@ -77,7 +70,6 @@
               <input
                 type="email"
                 class="form-control custom-blue-bg py-0"
-                id="city"
                 aria-describedby="emailHelp"
               />
             </div>
@@ -86,7 +78,6 @@
               <input
                 type="email"
                 class="form-control custom-blue-bg py-0"
-                id="zipcode"
                 aria-describedby="emailHelp"
               />
             </div>

@@ -2,58 +2,100 @@
   <div>
     <h3 class="text-blue text-left font-weight-bold ml-3">PORTFOLIO</h3>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-2 col-sm-0"></div>
-        <div class="col-md-5 card-background">
+      <div class="row" style="justify-content: center">
+        <div class="col-md-10 card-background">
           <form style="text-align: left;" @submit="onSubmit">
-            <div class="form-group">
-              <label for="category">Category</label>
-              <select class="form-control" id="category" v-model="form.category">
-                <option>1</option>
-                <option>2</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="sub-catogory">Sub-Catagory</label>
-              <select class="form-control" id="sub-category" v-model="form.subCategory">
-                <option>1</option>
-                <option>2</option>
-              </select>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label class="label-large" for="category">Category</label>
+                <select
+                  class="form-control custom-light-bg"
+                  id="category"
+                  v-model="form.category"
+                  @change="selectCategory"
+                  @select="selectCategory"
+                  required
+                >
+                  <option
+                    v-for="category in categories"
+                    :key="category.title"
+                    :value="category.title"
+                  >
+                    {{ category.title }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="label-large" for="subcategory">
+                  Sub-Category
+                </label>
+                <select
+                  class="form-control custom-light-bg"
+                  id="subcategory"
+                  v-model="form.subCategory"
+                  required
+                >
+                  <option
+                    v-for="subCategory in getSubCategory()"
+                    :key="subCategory"
+                    :value="subCategory"
+                  >
+                    {{ subCategory }}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
               <label for="projectName">Project Name</label>
               <input type="text" class="form-control" id="projectName" v-model="form.projectName" />
             </div>
-            <div class="form-group row">
-              <div class="col-md-4 mr-5">
-                <div class="col mb-n1 text-left">
-                  <label class="mb-0" for="projectName"
-                    >Upload Image/Video</label
-                  >
+            <div class="form-group">
+              <div class="card-background mb-4" style="display: block; text-align: center;">
+                <div v-if="form.imageVideos.length > 0" class="row">
+                  <div v-for="image in form.imageVideos" :key="image.url" class="col-md-3">
+                    <div v-if="image.extension === 'mp4'" style="height: 100px;">
+                      <video poster="data:image/gif,AAAA" preload="auto" controls autoplay height="80">
+                        <source type="video/mp4" :src="image.url"/>
+                      </video>
+                    </div>
+                    <div v-else style="height: 100px;">
+                      <img :src="image.url" alt="" height="80">
+                    </div>
+                  </div>
                 </div>
-                <div class="col mb-n1 text-right">
-                  <small class="mr-3"> max size</small>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <img class="icon" src="add-file.png" alt="" />
+                <b-button
+                  @click="uploadImage"
+                  style="height: 80px; width: 80px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.25); background: none;">
+                  <img src="@/assets/images/others/add-file.png" alt="">
+                </b-button>
+                <p>Upload Images/Videos</p>
               </div>
             </div>
             <div class="form-group">
               <label for="caption">Enter caption:</label>
               <textarea class="form-control" id="caption" rows="3x" v-model="form.caption"></textarea>
             </div>
-            <div class="form-group row">
-              <div class="col-md-4 mr-5">
-                <div class="col mb-n1 text-left">
-                  <label class="mb-0" for="textfile">Upload Text File</label>
+            <div class="form-group">
+              <div class="card-background mb-4" style="display: block; text-align: center;">
+                <div v-if="form.files.length > 0" class="row">
+                  <div v-for="file in form.files" :key="file.url" class="col-md-3">
+                    <div v-if="file.extension === 'pdf'" style="height: 100px;">
+                      <img src="@/assets/images/pdf.png" alt="" height="80">
+                    </div>
+                    <div v-if="file.extension === 'doc' || file.extension === 'docx'" style="height: 100px;">
+                      <img src="@/assets/images/microsoft-word.png" alt="" height="80">
+                    </div>
+                    <div v-if="file.extension === 'xls' || file.extension === 'xlsx'" style="height: 100px;">
+                      <img src="@/assets/images/excel.png" alt="" height="80">
+                    </div>
+                  </div>
                 </div>
-                <div class="col mb-n1 text-right">
-                  <small class="mr-3">max size</small>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <img id="textfile" class="icon" src="add-file.png" alt="" />
+                <b-button
+                  @click="uploadFile"
+                  style="height: 80px; width: 80px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.25); background: none;">
+                  <img src="@/assets/images/others/add-file.png" alt="">
+                </b-button>
+                <p>Upload Files</p>
               </div>
             </div>
             <div class="form-group">
@@ -64,9 +106,7 @@
 
             <div class="col-md-10 mt-5 pl-5 ml-5">
               <button
-                @click="() => {
-                  $router.push('/portfolio/pf')
-                }"
+                @click="onSubmit"
                 type="submit"
                 class="btn btn-primary bg-darkblue"
                 style="width: 120px; margin-left: -60px"
@@ -76,48 +116,116 @@
             </div>
           </form>
         </div>
-        <div class="col-md-2 col-sm-0"></div>
-        <div class="col-md-3">
-            <!-- <nav class="navbar navbar-light ">
-                <ul class="navbar-nav custom-nav ml-auto">
-                    <li class="nav-item px-1">
-                        <a class="nav-link" href="#">Sub-catogory</a>
-                    </li>
-                    <li class="nav-item px-1">
-                        <a class="nav-link" href="#">Sub-catogory</a>
-                    </li>
-                    <li class="nav-item px-1">
-                        <a class="nav-link" href="#">Sub-catogory</a>
-                    </li>
-                </ul>
-            </nav> -->
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "Portfolio",
+  components: {
+  },
   data() {
-      return {
-          form: {
-            category: '',
-            subCategory: '',
-            projectName: '',
-            imageVideoUrl: '',
-            extension: '',
-            caption: '',
-            url: ''
-          }
+    return {
+      categories: [],
+      selectedCategory: {},
+      form: {
+        user: '',
+        category: '',
+        subCategory: '',
+        imageVideos: [],
+        projectName: '',
+        caption: '',
+        files: [],
+        url: ''
       }
+    }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  },
+  created() {
+    this.$store.dispatch('getCategories')
+      .then(
+        (response) => {
+          this.categories = response.data.data
+        }
+      )
   },
   methods: {
-      onSubmit(e) {
-          e.preventDefault()
-          console.log(this.form)
+    selectCategory() {
+      const categories = this.categories.filter(category => category.title === this.form.category)
+      this.selectedCategory = categories[0]
+    },
+    getSubCategory() {
+      // return ['Hi', 'Hello', 'How']
+      return this.selectedCategory ? this.selectedCategory.subCategories : []
+    },
+    onSubmit(e) {
+      e.preventDefault()
+      this.form.user = this.user._id
+      this.$store.dispatch('createPortfolio', this.form)
+        .then(
+          (response) => {
+            if (response) {
+              this.$router.push('/portfolio/pf')
+            }
+          }
+        )
+        .catch(
+          (error) => {
+            console.log(error.response.data)
+          }
+        )
+    },
+    createCloudinaryWidget () {
+      const newWidget = window.cloudinary.createUploadWidget({
+        cloudName: 'storage96',
+        uploadPreset: 'texxen_portfolio_images_videos',
+        multiple: true,
+        clientAllowedFormats: ['png', 'jpg', 'jpeg', 'mp4']
+      },
+      (error, result) => {
+        if (!error && result && result.event === 'success') {
+          this.form.imageVideos.push({
+            url: result.info.url,
+            extension: result.info.format
+          })
+        }
       }
+      )
+      return newWidget
+    },
+    createCloudinaryWidgetForFiles () {
+      const newWidget = window.cloudinary.createUploadWidget({
+        cloudName: 'storage96',
+        uploadPreset: 'texxen_portfolio_files',
+        multiple: true,
+        clientAllowedFormats: ['pdf', 'xlsx', 'xls', 'doc', 'docx']
+      },
+      (error, result) => {
+        if (!error && result && result.event === 'success') {
+          this.form.files.push({
+            url: result.info.url,
+            extension: result.info.format
+          })
+        }
+      }
+      )
+      return newWidget
+    },
+    uploadImage () {
+      const cloudinaryWidget = this.createCloudinaryWidget()
+      cloudinaryWidget.open()
+    },
+    uploadFile () {
+      const cloudinaryWidget = this.createCloudinaryWidgetForFiles()
+      cloudinaryWidget.open()
+    }
   }
 };
 </script>

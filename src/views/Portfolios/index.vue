@@ -1,25 +1,11 @@
 <template>
   <div style="background-color: white;">
-    <div class="header">
-      <!-- <div class="bottom-nav">    
-        <router-link to="/Home-2" href="Home-2">Graphics & Design</router-link>
-        <router-link to="/home" href="#about">Digital Marketing</router-link>
-        <router-link to="/home" href="#contact">Writing & Editing</router-link>
-        <router-link to="/home" href="#contact">Music & Audio</router-link>
-        <router-link to="/home" href="#contact">Business</router-link>
-        <router-link to="/home" href="#contact">Programming</router-link>
-      </div> -->
-    </div>
     <div class="row ml-4" style="margin: 0; padding: 0;">
       <div class="col-lg-6 card-background" style="padding: 73px 0px">
-        <img class="profile-avatar" src="@/assets/images/others/avatar.png">
-        <h1>James Gorden</h1>
-        <p>Journalist, writer and content marketing specialist</p>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
+        <img class="profile-avatar" :src="user.avatar">
+        <h1>{{ user.name }}</h1>
+        <p>{{ user.description }}</p>
+        <b-form-rating v-bind="4.2" variant="warning" class="mb-2"></b-form-rating>
         <p>4.2 (100 reviews)</p>
         <div class="flex-container" style="justify-content: center; ">
             <button
@@ -43,6 +29,36 @@
             :gig="gig"
           />
         </div>
+        <div style="display: flex; flex-wrap: wrap; margin-left: 80px;">
+          <div
+            v-for="portfolio in portfolios"
+            :key="portfolio._id"
+            class="card-background mt-2"
+            @click="() => {
+              $router.push(`/portfolio/${portfolio._id}`)
+            }"
+          >
+            <p style="color: #0616fb; font-size: 22px; text-align: left; font-weight: 700;">{{ portfolio.projectName }}</p>
+            <div class="ml-4 pl-2" style="border-left: 5px solid #0616fb" align="left">
+              <div>
+                <p class="mb-0 mt-0" style="font-size: 12px; font-weight: 700;">Category</p>
+                <p class="ml-5 mt-0 mb-0">{{ portfolio.category }}</p>
+              </div>
+              <div>
+                <p class="mb-0 mt-0" style="font-size: 12px; font-weight: 700;">Sub Category</p>
+                <p class="ml-5 mt-0 mb-0">{{ portfolio.subCategory }}</p>
+              </div>
+              <div>
+                <p class="mb-0 mt-0" style="font-size: 12px; font-weight: 700;">Caption</p>
+                <p class="ml-5 mt-0 mb-0">{{ portfolio.caption }}</p>
+              </div>
+              <div>
+                <p class="mb-0 mt-0" style="font-size: 12px; font-weight: 700;">url</p>
+                <p class="ml-5 mt-0 mb-0"><a :href="portfolio.url" target="_blank">{{ portfolio.url }}</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -50,6 +66,7 @@
 
 <script>
 import GigCard from '@/components/Dashboard/GigCard'
+import { mapState } from 'vuex'
 export default {
   name: 'ProfilePage',
   components: {
@@ -98,8 +115,22 @@ export default {
             startingPrice: 100
           }
         },
-      ]
+      ],
+      portfolios: []
     }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  },
+  created() {
+    this.$store.dispatch('getPortfolioByUser', this.user._id)
+      .then(
+        (response) => {
+          this.portfolios = response.data.data
+        }
+      )
   }
 }
 </script>

@@ -45,92 +45,79 @@
           </div>
         </div>
         <div class="card-background">
-       <div class="col-md-10">
-            <div class="col-md-12" style="margin-left: 12%;">
-              <div class="forteen " style="margin-left: 400px; display: inline-flex; width: 70%;">
-                <ul class="nav " style=" ">
-                  <li class="nav-item ml-5" style="font-size: 14px;">
-                    Impression
-                  </li>
-                  <li class="nav-item ml-5" style="font-size: 14px; ">
-                    Clicks
-                  </li>
-                  <li class="nav-item ml-5" style="font-size: 14px;">
-                    Orders
-                  </li>
-                  <li class="nav-item ml-5" style="font-size: 14px;">
-                    Cancelation
-                  </li>
-                </ul>
-              </div>
-            </div>
+          <div>
+            <table
+              class="table mt-5 card-background"
+            >
+              <thead align="center">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Gig</th>
+                  <th scope="col">Impressions</th>
+                  <th scope="col">Clicks</th>
+                  <th scope="col">Orders</th>
+                  <th scope="col">Cancelation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="gig in gigs"
+                  :key="gig._id"
+                  align="center"
+                >
+                  <th scope="row"
+                  >
+                    <div
+                      v-if="gig.picture"
+                      class="card-background"
+                      style="padding: 0; height: 80px; width: 70px; border-radius: 8px; overflow: hidden"
+                    >
+                      <img :src="gig.picture" alt="" height="80">
+                    </div>
+                  </th>
+                  <td style="padding-top: 38px;">{{ gig.title }}</td>
+                  <td style="padding-top: 38px;">{{ gig.impressions }}</td>
+                  <td style="padding-top: 38px;">{{ gig.clicks }}</td>
+                  <td style="padding-top: 38px;">{{ gig.orders }}</td>
+                  <td style="padding-top: 38px;">{{ gig.cancellations }}</td>
+                  <td style="padding-top: 25px;">
+                    <button
+                      @click="() => {
+                        $router.push(`/gigs/${gig._id}`)
+                      }"
+                      class="card-background"
+                      style="margin: 0; padding: 10px; border-radius: 50%; background: none; border: none; outline: none;"
+                    >
+                      <b-icon icon="eye"></b-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-          <ul style="list-style: none; margin-left: -20px; width: 86.1%;">
-            <li>
-              <div class="form-check">
-                <input class="" type="checkbox" value="" id="defaultCheck1" />
-                <label class="" for="defaultCheck1">
-                  <img
-                    style="width: 80px; height: 45px; margin-left: 10px;"
-                    src="@/assets/images/others/capture.png"
-                  />
-                </label>
-              </div>
-            </li>
-
-            <li>
-              <div class="form-check mt-1">
-                <input class="" type="checkbox" value="" id="defaultCheck1" />
-                <label class="" for="defaultCheck1">
-                  <img
-                    style="width: 80px; height: 45px; margin-left: 10px;"
-                    src="@/assets/images/others/capture.png"
-                  />
-                </label>
-              </div>
-            </li>
-            <li>
-              <div class="form-check mt-1">
-                <input class="" type="checkbox" value="" id="defaultCheck1" />
-                <label class="" for="defaultCheck1">
-                  <img
-                    style="width: 80px; height: 45px; margin-left: 10px;"
-                    src="@/assets/images/others/capture.png"
-                  />
-                </label>
-              </div>
-            </li>
-
-            <li>
-              <div class="form-check mt-1">
-                <input class="" type="checkbox" value="" id="defaultCheck1" />
-                <label class="" for="defaultCheck1">
-                  <img
-                    style="width: 80px; height: 45px; margin-left: 10px;"
-                    src="@/assets/images/others/capture.png"
-                  />
-                </label>
-              </div>
-            </li>
-            <li>
-              <div class="form-check mt-1">
-                <input class="" type="checkbox" value="" id="defaultCheck1" />
-                <label class="" for="defaultCheck1">
-                  <img
-                    style="width: 80px; height: 45px; margin-left: 10px;"
-                    src="@/assets/images/others/capture.png"
-                  />
-                </label>
-              </div>
-            </li>
-
-            <br />
-            <br />
-            <br />
-          </ul>
-        </div>
+            
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'Gigs',
+  data() {
+    return {
+      gigs: []
+    }
+  },
+  created() {
+    this.$store.dispatch('getGigs')
+      .then(
+        (response) => {
+          this.gigs = response.data.data
+        }
+      )
+  }
+}
+</script>

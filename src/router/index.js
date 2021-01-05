@@ -65,15 +65,20 @@ const routes = [
     component: () => import("@/Layouts/DashboardLayout"),
     children : [
       {
-      path: '',
-      name:'Add Portfolio',
-      component: ()=> import('@/views/Portfolios/Create.vue')
-      },
-      {
-        path: 'pf',
+        path: '',
         name:'View Portfolio',
         component: ()=> import('@/views/Portfolios/index.vue')
-        },
+      },
+      {
+      path: ':id',
+      name: 'Portfolio Detail',
+      component: ()=> import('@/views/Portfolios/Detail.vue')
+      },
+      {
+        path: 'create',
+        name:'Create Portfolio',
+        component: ()=> import('@/views/Portfolios/index.vue')
+      },
     ]
   },
   // Seller Gigs
@@ -93,6 +98,11 @@ const routes = [
         name: 'Create Gig',
         component: () => import('@/views/Gigs/CreateGig.vue')
       },
+      {
+        path: ':id',
+        name: 'View Gig',
+        component: () => import('@/views/Gigs/Detail.vue')
+      }
     ]
   },
   // User Profile

@@ -238,6 +238,66 @@ export default new Vuex.Store({
         method: 'DELETE'
       })
     },
+    createGig({ commit }, payload) {
+      commit('Data', payload)
+      return axios({
+        url: '/gigs',
+        method: 'POST',
+        data: payload
+      })
+    },
+    getGigs({ commit }) {
+      commit('Data', {})
+      return axios({
+        url: '/gigs',
+        method: 'GET'
+      })
+    },
+    getGig({ commit }, id) {
+      commit('Data', {})
+      return axios({
+        url: `/gigs/${id}`,
+        method: 'GET'
+      })
+    },
+    updateGig({ commit }, data) {
+      commit('Data', {})
+      return axios({
+        url: `/gigs/${data.id}`,
+        method: 'PATCH',
+        data: data.payload
+      })
+    },
+    addPricingToGig({ commit }, data) {
+      commit('Data', {})
+      return axios({
+        url: `/gigs/${data.id}`,
+        method: 'PATCH',
+        data: data.payload
+      })
+    },
+    createPortfolio({ commit }, payload) {
+      commit('Data', {})
+      return axios({
+        url: '/portfolios',
+        method: 'POST',
+        data: payload
+      })
+    },
+    getPortfolioByUser({ commit }, userId) {
+      commit('Data', {})
+      return axios({
+        url: `/portfolios/byusers/${userId}`,
+        method: 'GET'
+      })
+    },
+    getPortfolio({ commit }, id) {
+      commit('setData', {})
+      return axios({
+        url: `/portfolios/${id}`,
+        method: 'GET'
+      })
+    }
   },
   modules: {}
   })
