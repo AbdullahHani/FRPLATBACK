@@ -7,7 +7,7 @@
             <div class="sidenavbar card-background">
                 <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/profilesetting"
+                to="/profile"
                 >Account
               </router-link>
               <router-link
@@ -17,31 +17,33 @@
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/Notification"
+                to="/profile/notification"
                 >Notification</router-link
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/Billing"
+                to="/profile/billing"
                 >Billing Information</router-link
               >
             </div>
           </div>
           <div class="col-md-7">
-            <div class="card-background">
-              <h3 class="text-blue pt-5" style="font-size: 18px">
+            <div class="card-background pb-5">
+              <h3 class="text-blue" style="font-size: 18px">
                 Change Password
               </h3>
-              <hr class="border-blue m-0 w-100" />
-              <form class="pt-4">
+              <hr class="border-blue w-100" />
+              <form class="pt-4" @submit="changePassword">
                 <div class="form-group">
                   <div class="row ml-1">
                     <label class="label-large">Current Password </label>
                     <div class="dandt lower">
                       <input
-                        type="Password"
+                        type="password"
                         class="form-control dandt mail ml-4"
                         placeholder=""
+                        v-model="passwordForm.oldPassword"
+                        required
                       />
                     </div>
                     <br /><br />
@@ -50,31 +52,40 @@
                     <label class="label-large">New Password </label>
                     <div class="dandt lower" style="margin-left: 22px">
                       <input
-                        type="Password"
-                        class="form-control dandt mail ml-4"
+                        type="password"
+                        class="form-control ml-4"
                         placeholder=""
+                        v-model="passwordForm.newPassword"
+                        required
                       />
                     </div>
-                    <br /><br />
+                    <br /> <br />
                   </div>
-                  <div class="row ml-1">
+                  <div class="row ml-1 mb-4">
                     <label class="label-large" style="margin-left: -2px"
                       >Confirm Password
                     </label>
-                    <div class="dandt lower">
+                    <div class="">
                       <input
-                        type="Password"
-                        class="form-control dandt mail ml-4"
+                        type="password"
+                        class="form-control ml-4"
                         placeholder=""
+                        v-model="passwordForm.confirmPassword"
+                        required
                       />
                     </div>
+                    <br> <br>
+                    <p v-if="unmatchPassword" style="text-align: center; color: red; font-size: 12px;">
+                      {{ unmatchPassword }}
+                    </p>
                   </div>
-
-                  <button class="float-right mt-4 btn btn-secondary bg-darkblue">
-                    Save Settings
+                  <button
+                    type="submit" 
+                    class="float-right btn btn-info mb-4"
+                  >
+                    Change Password
                   </button>
                 </div>
-                <br /><br />
               </form>
               <hr class="border-blue mt-3 w-120" />
             </div>
@@ -134,8 +145,59 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "Security",
+  data() {
+    return {
+      passwordForm: {
+        oldPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      },
+      unmatchPassword: ''
+    }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  },
+  methods: {
+    changePassword(e) {
+      e.preventDefault()
+      if (this.passwordForm.newPassword !== this.passwordForm.confirmPassword) {
+        this.unmatchPassword = 'Password does not match'
+      } else {
+        const data = {
+          id: this.user._id,
+          payload: this.passwordForm
+        }
+        this.$store.dispatch('updatePassword', data)
+          .then(
+            (response) => {
+              this.$store.commit('currentUser', response.data.data)
+              this.makeToast(response.data)
+            }
+          )
+          .catch(
+            (error) => {
+              this.makeToast(error.response.data)
+            }
+          )
+      }
+    },
+    onFocusPassword() {
+      this.unmatchPassword = ''
+    },
+    makeToast(data) {
+      this.$bvToast.toast(data.message, {
+        title: data.status,
+        autoHideDelay: 3000,
+        appendToast: false
+      })
+    }
+  }
 };
 </script>
 

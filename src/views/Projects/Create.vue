@@ -5,6 +5,10 @@
       <div class="row" style="justify-content: center">
         <div class="col-md-10 card-background">
           <form style="text-align: left;" @submit="onSubmit">
+            <div class="form-group">
+              <label for="projectName">Project Name</label>
+              <input type="text" class="form-control" id="projectName" v-model="form.projectName" />
+            </div>
             <div class="form-group row">
               <div class="col-md-6">
                 <label class="label-large" for="category">Category</label>
@@ -46,34 +50,8 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="projectName">Project Name</label>
-              <input type="text" class="form-control" id="projectName" v-model="form.projectName" />
-            </div>
-            <div class="form-group">
-              <div class="card-background mb-4" style="display: block; text-align: center;">
-                <div v-if="form.imageVideos.length > 0" class="row">
-                  <div v-for="image in form.imageVideos" :key="image.url" class="col-md-3">
-                    <div v-if="image.extension === 'mp4'" style="height: 100px;">
-                      <video poster="data:image/gif,AAAA" preload="auto" controls autoplay height="80">
-                        <source type="video/mp4" :src="image.url"/>
-                      </video>
-                    </div>
-                    <div v-else style="height: 100px;">
-                      <img :src="image.url" alt="" height="80">
-                    </div>
-                  </div>
-                </div>
-                <b-button
-                  @click="uploadImage"
-                  style="height: 80px; width: 80px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.25); background: none;">
-                  <img src="@/assets/images/others/add-file.png" alt="">
-                </b-button>
-                <p>Upload Images/Videos</p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="caption">Enter caption:</label>
-              <textarea class="form-control" id="caption" rows="3x" v-model="form.caption"></textarea>
+              <label for="caption">Description:</label>
+              <textarea class="form-control" id="caption" rows="3x" v-model="form.description"></textarea>
             </div>
             <div class="form-group">
               <div class="card-background mb-4" style="display: block; text-align: center;">
@@ -99,10 +77,17 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="url">Enter URL</label>
-              <input type="text" class="form-control" id="url" v-model="form.url"/>
+              <label for="url">Budget</label>
+              <input type="number" class="form-control" id="url" v-model="form.budget"/>
             </div>
-            <br /><br />
+            <div class="form-group">
+              <label for="url">Delivery Date</label>
+              <datetime
+                v-model="form.deliveryDate"
+                type="datetime"
+                input-class="form-control"
+              ></datetime>
+            </div>
 
             <div class="col-md-10 mt-5 pl-5 ml-5">
               <button
@@ -123,9 +108,12 @@
 
 <script>
 import { mapState } from 'vuex';
+import { Datetime } from 'vue-datetime'
+import 'vue-datetime/dist/vue-datetime.css'
 export default {
   name: "Portfolio",
   components: {
+    Datetime
   },
   data() {
     return {
@@ -133,13 +121,13 @@ export default {
       selectedCategory: {},
       form: {
         user: '',
+        deliveryDate: '',
         category: '',
         subCategory: '',
-        imageVideos: [],
         projectName: '',
-        caption: '',
+        description: '',
         files: [],
-        url: ''
+        budget: null
       }
     }
   },
@@ -168,11 +156,11 @@ export default {
     onSubmit(e) {
       e.preventDefault()
       this.form.user = this.user._id
-      this.$store.dispatch('createPortfolio', this.form)
+      this.$store.dispatch('createProject', this.form)
         .then(
           (response) => {
             if (response) {
-              this.$router.push('/portfolio')
+              this.$router.push('/projects')
             }
           }
         )
@@ -181,24 +169,6 @@ export default {
             console.log(error.response.data)
           }
         )
-    },
-    createCloudinaryWidget () {
-      const newWidget = window.cloudinary.createUploadWidget({
-        cloudName: 'storage96',
-        uploadPreset: 'texxen_portfolio_images_videos',
-        multiple: true,
-        clientAllowedFormats: ['png', 'jpg', 'jpeg', 'mp4']
-      },
-      (error, result) => {
-        if (!error && result && result.event === 'success') {
-          this.form.imageVideos.push({
-            url: result.info.url,
-            extension: result.info.format
-          })
-        }
-      }
-      )
-      return newWidget
     },
     createCloudinaryWidgetForFiles () {
       const newWidget = window.cloudinary.createUploadWidget({
@@ -217,10 +187,6 @@ export default {
       }
       )
       return newWidget
-    },
-    uploadImage () {
-      const cloudinaryWidget = this.createCloudinaryWidget()
-      cloudinaryWidget.open()
     },
     uploadFile () {
       const cloudinaryWidget = this.createCloudinaryWidgetForFiles()

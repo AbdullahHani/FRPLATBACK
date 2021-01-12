@@ -1,6 +1,6 @@
 <template>
     <div class="login-form">
-        <form>
+        <form @submit="auth">
           <img height="80" src="@/assets/images/others/Group 62.png" alt="">
             <div class="form-wrapper-outer">
                 <b-input-group class="field-wrapper-login">
@@ -48,27 +48,28 @@ export default {
   created() {
     if (this.user) {
       if(this.user.email) {
-        if(this.user.profileCompleted){
-          this.$router.push('/gigs');
+        if(this.user.role === 'Buyer'){
+          this.$router.push('/dashboard');
         } else {
-          this.$router.push('/seller/complete');
-        } 
+          this.$router.push('/gigs');
+        }
       }
     }
   },
   methods: {
-    auth() {
+    auth(e) {
+      e.preventDefault()
       this.loading = true;
-      this.$store.dispatch('loginUser', this.login)
+      this.$store.dispatch('userLogin', this.login)
         .then(
           (response)=> {
             const res = response.data.data;
             this.$store.commit('currentUser', res);
             this.loading = false;
-            if(res.profileCompleted){
-              this.$router.push('/gigs');
+            if(res.role === 'Buyer'){
+              this.$router.push('/dashboard');
             } else {
-              this.$router.push('/seller/complete');
+              this.$router.push('/gigs');
             }
           }
         )

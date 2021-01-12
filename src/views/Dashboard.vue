@@ -1,23 +1,18 @@
 <template>
   <div style="padding: 10px;">
-    <div class="row card-background">
-      <div class="col-lg-10">
-        <p class="category-heading">Graphic Design and Illustration</p>
-        <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
-          <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
-        </div>
-        <p class="category-heading">Social Media Marketing Services</p>
-        <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
-          <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
-        </div>
-        <p class="category-heading">Graphic Design and Illustration Services</p>
-        <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
-          <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
-        </div>
-      </div>
-      <div class="col-lg-2">
-        <div class="card-background">
-          List
+    <div class="card-background">
+      <div
+        v-for="categorizedGig in categorizedGigs"
+        :key="categorizedGig.category"
+      >
+        <p class="category-heading">{{ categorizedGig.category }}</p>
+        <div style="row">
+          <gig-card
+            class="col-lg-3 col-md-6 col-sm-12"
+            v-for="(gig, index) in categorizedGig.gigs"
+            :key="index"
+            :gig="gig"
+          />
         </div>
       </div>
     </div>
@@ -35,6 +30,7 @@ export default {
   },
   data() {
     return {
+      categorizedGigs: [],
       gigs: [
         {
           seller: {
@@ -83,6 +79,14 @@ export default {
     ...mapState({
       user: state => state.user
     })
+  },
+  created() {
+    this.$store.dispatch('gigsByCategories')
+      .then(
+        (response) => {
+          this.categorizedGigs = response.data.data
+        }
+      )
   }
 }
 </script>

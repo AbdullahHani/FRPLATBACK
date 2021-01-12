@@ -7,7 +7,7 @@
             <div class="sidenavbar card-background">
                 <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/profilesetting"
+                to="/profile"
                 >Account
               </router-link>
               <router-link
@@ -17,12 +17,12 @@
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/Notification"
+                to="/profile/notification"
                 >Notification</router-link
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/Billing"
+                to="/profile/billing"
                 >Billing Information</router-link
               >
             </div>

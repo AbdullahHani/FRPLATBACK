@@ -224,8 +224,9 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
+      user: '',
       gigId: '',
-      tabIndex: 1,
+      tabIndex: 0,
       selectedCategory: {},
       gigForm: {
         title: '',
@@ -292,6 +293,7 @@ export default {
     },
     addGig(e) {
       e.preventDefault()
+      this.gigForm.user = this.user._id
       this.$store.dispatch('createGig', this.gigForm)
         .then(
           (response) => {

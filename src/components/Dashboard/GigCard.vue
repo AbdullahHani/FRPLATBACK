@@ -1,13 +1,13 @@
 <template>
 <div>
   <div class="gig-card card-background" style="padding: 0;">
-    <div style="width: 100%; height: 200px; overflow: hidden;">
+    <div style="width: 100%; overflow: hidden;">
       <img
-        v-if="gig.img"
+        v-if="gig.picture"
         class="avatar"
-        :src="gig.img"
+        :src="gig.picture"
         alt=""
-        style="height: 100%;"
+        style="height: 100%; width: 100%"
       >
       <img
         v-else
@@ -17,40 +17,37 @@
         style="height: 100%;"
       >
     </div>
-    <div style="display: flex; margin: 10px;">
-      <div style="width: 40px; height: 40px; overflow: hidden; border-radius: 50%;">
+    <div style="display: flex;">
+      <div style="width: 30%;">
         <img
-          v-if="gig.seller.avatar"
-          :src="gig.seller.avatar"
+          v-if="gig.user.avatar"
+          :src="gig.user.avatar"
           alt=""
-          style="height: 100%;"
+          style="width: 80px; height: 80px; overflow: hidden; border-radius: 50%; margin: 10px 5px;"
         >
         <img
           v-else
           src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"
           alt=""
-          style="height: 100%;"
+          style="width: 80px; height: 80px; overflow: hidden; border-radius: 50%; margin: 10px 5px;"
         >
       </div>
-      <div style="padding-left: 10px;">
+      <div style="padding-left: 10px; text-align: left; margin-top: 10px;">
         <p class="seller-name">
-          {{ gig.seller.name }}
+          {{ gig.user.name }}
         </p>
         <p class="seller-rating">
-          {{ gig.seller.ratings.value }} ({{ gig.seller.ratings.raters.length }})
+          {{ gig.user.ratings.value }} ({{ gig.user.ratings.raters.length }}) <span class="seller-choice">Expert's Choice</span>
         </p>
-        <p class="seller-choice">
-          Expert's Choice
-        </p>
+        <div style="display: flex; margin: 5px -8px;">
+          <button
+            class="gig-button"
+            @click="goToGig">
+            <img src="@/assets/images/others/buttonBars.png" height="20" alt="">
+          </button>
+          <p class="seller-starting-price">Starting from ${{ gig.pricings[0].price  }}</p>
+        </div>
       </div>
-    </div>
-    <div style="display: flex; margin: 10px;">
-      <button
-        class="gig-button"
-        @click="goToGig">
-        <img src="@/assets/images/others/buttonBars.png" height="15" alt="">
-      </button>
-      <p class="seller-starting-price">Starting from ${{gig.seller.startingPrice}}</p>
     </div>
   </div>
 </div>
@@ -78,36 +75,41 @@ export default {
 
 <style lang="scss">
   .gig-card {
-    width: 200px;
+    width: 280px;
     // border: 1px solid #3a3b3b;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: #ffffff;
   }
   .seller-name {
     color: #575656;
-    font-size: 14px;
+    font-size: 16px;
     margin: 0;
+    font-weight: 700;
   }
   .seller-rating {
     color: #30308b;
-    font-size: 10px;
+    font-size: 12px;
     margin: 0;
     text-align: left;
+    font-weight: 700;
   }
   .seller-choice {
     color: #747373;
     font-size: 14px;
-    margin: 0;
+    // margin: 0;
   }
   .seller-starting-price {
-    padding-left: 20px;
+    // padding-left: 20px;
     color: #747373;
     font-size: 16px;
     margin: 0;
+    font-weight: 600;
   }
   .gig-button {
     background: none;
     border: none;
+    outline: none;
+    margin: 0;
   }
 </style>

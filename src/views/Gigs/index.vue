@@ -19,29 +19,6 @@
                 </b-button>
               </div>
             </div>
-            <div class="forteen" style="margin-left: -100px;">
-              <ul style="display: inline-flex; list-style: none;">
-                <li class="">
-                  <a class="nav-link text-blue" style="color: black;" href="#">
-                    <strong>Active</strong>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" style="color: black;" href="#">Pending</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" style="color: black;" href="#">
-                    Require Modification
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" style="color: black;" href="#">Draft</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" style="color: black;" href="#">Denied</a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
         <div class="card-background">

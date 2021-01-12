@@ -70,14 +70,14 @@ const routes = [
         component: ()=> import('@/views/Portfolios/index.vue')
       },
       {
+        path: 'create',
+        name:'Create Portfolio',
+        component: ()=> import('@/views/Portfolios/Create.vue')
+      },
+      {
       path: ':id',
       name: 'Portfolio Detail',
       component: ()=> import('@/views/Portfolios/Detail.vue')
-      },
-      {
-        path: 'create',
-        name:'Create Portfolio',
-        component: ()=> import('@/views/Portfolios/index.vue')
       },
     ]
   },
@@ -91,7 +91,7 @@ const routes = [
       {
         path: '',
         name: 'List of Gigs',
-        component: () => import('@/views/Gigs/Gigs.vue')
+        component: () => import('@/views/Gigs/index.vue')
       },
       {
         path: 'create',
@@ -113,7 +113,7 @@ const routes = [
     component:()=> import("@/Layouts/DashboardLayout"),
     children : [
       {
-        path: 'profilesetting',
+        path: '',
         name: 'Profile Setting',
         component:()=> import('@/views/Profile/Account.vue')
       },
@@ -123,7 +123,7 @@ const routes = [
         component: () => import('@/views/Profile/Security.vue')
       },
       {
-        path:'Notification',
+        path:'notification',
         name:'Profile Notification',
         component: () => import('@/views/Profile/Notification.vue')
       },
@@ -131,7 +131,12 @@ const routes = [
         path:'billing',
         name:'Profile Billing',
         component: () => import('@/views/Profile/Billing.vue')
-      }
+      },
+      {
+        path: ':id',
+        name: 'Profile Detail',
+        component:()=> import('@/views/Profile/index.vue')
+      },
     ] 
   },
   //User Wallet
@@ -159,6 +164,78 @@ const routes = [
       path: '',
       name:'Request Support',
       component: ()=> import('@/views/HelpandSupport/Create.vue')
+      }
+    ]
+  },
+  {
+    path: '/projects',
+    name: 'Projects',
+    redirect: '/projects',
+    component: () => import("@/Layouts/DashboardLayout"),
+    children : [
+      {
+        path: '',
+        name:'View Projects',
+        component: ()=> import('@/views/Projects/index.vue')
+      },
+      {
+        path: 'create',
+        name:'Create projects',
+        component: ()=> import('@/views/Projects/Create.vue')
+      },
+      {
+        path: ':id',
+        name: 'Projects Detail',
+        component: ()=> import('@/views/Projects/Detail.vue')
+      },
+    ]
+  },
+  {
+    path: '/requests',
+    name: 'Requests',
+    redirect: '/requests',
+    component: () => import("@/Layouts/DashboardLayout"),
+    children : [
+      {
+        path: '',
+        name:'Buyer Request',
+        component: ()=> import('@/views/BuyerRequests/index.vue')
+      }
+    ]
+  },
+  {
+    path: '/orders',
+    name: 'Orders',
+    redirect: '/orders',
+    component: () => import("@/Layouts/DashboardLayout"),
+    children : [
+      {
+        path: '',
+        name:'Order Listing',
+        component: ()=> import('@/views/Orders/index.vue')
+      },
+      {
+        path: ':id',
+        name:'Order Detail',
+        component: ()=> import('@/views/Orders/Detail.vue')
+      }
+    ]
+  },
+  {
+    path: '/chats',
+    name: 'Chats',
+    redirect: '/chats',
+    component: () => import("@/Layouts/ChatLayout"),
+    children : [
+      {
+        path: '',
+        name:'Chat',
+        component: ()=> import('@/views/Chats/new.vue')
+      },
+      {
+        path: ':id',
+        name:'Message Screen',
+        component: ()=> import('@/views/Chats/index.vue')
       }
     ]
   },

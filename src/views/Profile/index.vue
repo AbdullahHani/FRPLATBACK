@@ -1,13 +1,13 @@
 <template>
   <div style="background-color: white">
-    <div class="row" style="margin: 0; padding: 0" v-if="user.email">
+    <div class="row" style="margin: 0; padding: 0" v-if="profileUser.email">
       <div class="col-lg-6">
         <div class="card-background profile-card" align="center">
-          <img class="profile-avatar" :src="user.avatar" />
-          <h1>{{ user.name }}</h1>
-          <p>{{ user.description }}</p>
+          <img class="profile-avatar" :src="profileUser.avatar" />
+          <h1>{{ profileUser.name }}</h1>
+          <p>{{ profileUser.description }}</p>
           <b-form-rating
-            v-bind="user.ratings.value"
+            v-bind="profileUser.ratings.value"
             variant="warning"
             class="mb-2 mx-auto"
             size="lg"
@@ -15,8 +15,8 @@
           >
           </b-form-rating>
           <p>
-            {{ user.ratings.value }} ({{
-              user.ratings.raters.length
+            {{ profileUser.ratings.value }} ({{
+              profileUser.ratings.raters.length
             }}
             reviews)
           </p>
@@ -97,12 +97,13 @@
 import GigCard from '@/components/Dashboard/GigCard'
 import { mapState } from 'vuex'
 export default {
-  name: 'ProfilePage',
+  name: 'UserProfile',
   components: {
     GigCard
   },
   data() {
     return {
+      profileUser: {},
       gigs: [],
       portfolios: []
     }
@@ -113,16 +114,22 @@ export default {
     })
   },
   created() {
-    this.$store.dispatch('getPortfolioByUser', this.user._id)
+    this.$store.dispatch('getUser', this.$route.params.id)
       .then(
         (response) => {
-          this.portfolios = response.data.data
+          this.profileUser = response.data.data
         }
       )
-    this.$store.dispatch('getMyGigs')
+    this.$store.dispatch('gigsByUsers', this.$route.params.id)
       .then(
         (response) => {
           this.gigs = response.data.data
+        }
+      )
+    this.$store.dispatch('getPortfolioByUser', this.$route.params.id)
+      .then(
+        (response) => {
+          this.portfolios = response.data.data
         }
       )
   }

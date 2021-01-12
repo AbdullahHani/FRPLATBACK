@@ -39,7 +39,7 @@ export default new Vuex.Store({
     currentUser(state, currentUser) {
       state.user = currentUser
       if (!currentUser) {
-        state.user = currentUser
+        state.user = null
         localStorage.removeItem('currentUser')
         localStorage.removeItem('token')
         axios.defaults.headers.common.Authorization = null
@@ -80,6 +80,13 @@ export default new Vuex.Store({
       commit('Data', {})
       return axios({
         url: `/users?type=${type}`,
+        method: 'GET'
+      })
+    },
+    getUser({ commit }, id) {
+      commit('Data', {})
+      return axios({
+        url: `/users/${id}`,
         method: 'GET'
       })
     },
@@ -253,6 +260,13 @@ export default new Vuex.Store({
         method: 'GET'
       })
     },
+    getMyGigs({ commit }) {
+      commit('Data', {})
+      return axios({
+        url: '/gigs/user',
+        method: 'GET'
+      })
+    },
     getGig({ commit }, id) {
       commit('Data', {})
       return axios({
@@ -296,6 +310,106 @@ export default new Vuex.Store({
       return axios({
         url: `/portfolios/${id}`,
         method: 'GET'
+      })
+    },
+    createProject({ commit }, payload) {
+      commit('Data', {})
+      return axios({
+        url: '/projects',
+        method: 'POST',
+        data: payload
+      })
+    },
+    getProjectByUser({ commit }, userId) {
+      commit('Data', {})
+      return axios({
+        url: `/projects/byusers/${userId}`,
+        method: 'GET'
+      })
+    },
+    getProject({ commit }, id) {
+      commit('Data', {})
+      return axios({
+        url: `/projects/${id}`,
+        method: 'GET'
+      })
+    },
+    getProjects({ commit }) {
+      commit('Data', {})
+      return axios({
+        url: `/projects`,
+        method: 'GET'
+      })
+    },
+    getBuyerRequest({ commit }) {
+      commit('Data', {})
+      return axios({
+        url: `/projects/buyerrequest`,
+        method: 'GET'
+      })
+    },
+    createBid({ commit }, payload) {
+      commit('Data', {})
+      return axios({
+        url: '/bids',
+        method: 'POST',
+        data: payload
+      })
+    },
+    getBids({ commit }) {
+      commit('Data', {})
+      return axios({
+        url: '/bids',
+        method: 'GET'
+      })
+    },
+    getOrders({ commit }) {
+      commit('Data', {})
+      return axios({
+        url: '/bids/order',
+        method: 'GET'
+      })
+    },
+    switchProfile({commit}) {
+      commit('Data', {})
+      return axios({
+        url: '/users/switch',
+        method: 'PATCH'
+      })
+    },
+    gigsByUsers({ commit }, id) {
+      commit('Data', {})
+      return axios({
+        url: `/gigs/user/${id}`,
+        method: 'GET'
+      })
+    },
+    gigsByCategories({ commit }) {
+      commit('Data', {})
+      return axios({
+        url: '/gigs/categories',
+        method: 'GET'
+      })
+    },
+    getBidsByProject({ commit }, id) {
+      commit('Data', {})
+      return axios({
+        url: `/bids/project/${id}`,
+        method: 'GET'
+      })
+    },
+    getBid({ commit }, id) {
+      commit('Data', {})
+      return axios({
+        url: `/bids/${id}`,
+        method: 'GET'
+      })
+    },
+    acceptBid({ commit }, id) {
+      commit('Data', {})
+      return axios({
+        url: `/bids/accept/${id}`,
+        method: 'PATCH'
       })
     }
   },

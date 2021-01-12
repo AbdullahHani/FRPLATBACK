@@ -69,6 +69,11 @@
           </div>
           <div class="col-md-9">
               <div>
+                  <h4 style="font-weight: 600; font-size: 16px;">Seller</h4>
+                  <p>{{ gig.user.name }} <span style="float: right;"><router-link :to="`/profile/${gig.user._id}`">Visit Profile</router-link></span></p>
+                  <hr />
+              </div>
+              <div>
                   <h4 style="font-weight: 600; font-size: 16px;">Description</h4>
                   <p>{{ gig.description }}</p>
                   <hr />

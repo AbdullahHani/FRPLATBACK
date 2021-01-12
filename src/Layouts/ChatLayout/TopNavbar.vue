@@ -20,9 +20,6 @@
                         <router-link class="nav-link navbar-link text-center"  to="/profile">Profile Settings</router-link>
                     </li>
                     <li class="nav-item "  >
-                        <router-link class="nav-link navbar-link text-center"  to="/chats">Messages</router-link>
-                    </li>
-                    <li class="nav-item "  >
                         <router-link class="nav-link navbar-link text-center"  to="/help&support">Help and Support</router-link>
                     </li>
                     <li class="nav-item" style="margin-left: 20px; padding-top: 8px;">
@@ -42,6 +39,9 @@
                         <router-link class="nav-link navbar-link text-center"  to="/portfolio">Porfolio</router-link>
                     </li>
                     <li class="nav-item "  >
+                        <router-link class="nav-link navbar-link text-center"  to="/seller/complete">Complete Profile</router-link>
+                    </li>
+                    <li class="nav-item "  >
                         <router-link class="nav-link navbar-link text-center"  to="/requests">Buyer Request</router-link>
                     </li>
                     <li class="nav-item "  >
@@ -49,9 +49,6 @@
                     </li>
                     <li class="nav-item "  >
                         <router-link class="nav-link navbar-link text-center"  to="/orders">Orders</router-link>
-                    </li>
-                    <li class="nav-item "  >
-                        <router-link class="nav-link navbar-link text-center"  to="/chats">Messages</router-link>
                     </li>
                     <li class="nav-item "  >
                         <router-link class="nav-link navbar-link text-center"  to="/help&support">Help and Support</router-link>

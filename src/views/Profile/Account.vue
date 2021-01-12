@@ -10,7 +10,7 @@
             >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/profilesetting"
+                to="/profile"
                 >Account
               </router-link>
               <router-link
@@ -20,12 +20,12 @@
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/Notification"
+                to="/profile/notification"
                 >Notification</router-link
               >
               <router-link
                 class="nav-link navbar-link text-left"
-                to="/profile/Billing"
+                to="/profile/billing"
                 >Billing Information</router-link
               >
             </div>
@@ -40,9 +40,11 @@
                 <label class="label-large" for="gigTitle">Email </label>
                 <div class="dandt lower">
                   <input
+                    v-model="user.email"
                     type="text"
                     class="form-control dandt mail"
                     placeholder=""
+                    disabled
                   />
                 </div>
                 <br /><br />
@@ -126,8 +128,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "Account",
+  data() {
+    return {
+    }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  }
 };
 </script>
 
