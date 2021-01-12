@@ -64,6 +64,7 @@ export default {
         .then(
           (response) => {
             this.makeToast(response.data)
+            this.$router.push(`/chats/${response.data.data._id}`)
           }
         )
         .catch(

@@ -127,9 +127,9 @@ export default {
       this.$store.dispatch('sendMessage', message)
         .then(
           (response) => {
-            if (response.data.message) {
+            if (response.data.data) {
               this.msg = ''
-              this.socket.emit('sendMessage', message)
+              this.socket.emit('sendMessage', response.data.data)
             }
           }
         )
