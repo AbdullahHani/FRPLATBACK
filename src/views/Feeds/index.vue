@@ -1,21 +1,23 @@
 <template>
   <div style="padding: 10px;">
     <div class="card-background">
-      <div
-        v-for="categorizedGig in categorizedGigs"
-        :key="categorizedGig.category"
-      >
-        <p class="category-heading">{{ categorizedGig.category }}</p>
-        <div class="row">
-          <div
-            class="col-lg-3 col-md-4 col-sm-12"
-            v-for="(gig, index) in categorizedGig.gigs"
+      <div align="right">
+        <button
+            class="add-portfolio"
+            @click="() => {
+                $router.push('/portfolio/create')
+            }"
+        >+</button>
+      </div>
+      <div class="row">
+        <div
+            class="col-lg-4 col-md-12 col-sm-12"
+            v-for="(portfolio, index) in portfolios"
             :key="index"
-          >
-            <gig-card
-              :gig="gig"
+        >
+            <portfolio-card
+                :portfolio="portfolio"
             />
-          </div>
         </div>
       </div>
     </div>
@@ -24,16 +26,17 @@
 
 <script>
 import { mapState } from 'vuex'
-import GigCard from '@/components/Dashboard/GigCard'
+import PortfolioCard from '@/components/Portfolios/Cards/index'
 
 export default {
   name: 'Dashboard',
   components: {
-    GigCard
+    PortfolioCard
   },
   data() {
     return {
       categorizedGigs: [],
+      portfolios: [],
       gigs: [
         {
           seller: {
@@ -84,10 +87,10 @@ export default {
     })
   },
   created() {
-    this.$store.dispatch('gigsByCategories')
+    this.$store.dispatch('getPortfolios')
       .then(
         (response) => {
-          this.categorizedGigs = response.data.data
+          this.portfolios = response.data.data
         }
       )
   }
@@ -100,5 +103,19 @@ export default {
     color: #747373;
     font-weight: 700;
     text-align: left;
+  }
+  .add-portfolio {
+    height: 70px;
+    width: 70px;
+    font-weight: 900;
+    font-size: 48px;
+    color: #fff;
+    padding: 0;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.16);
+    background-image: url('../../assets/others/add-button.png');
+    background-size: cover;
+    outline: none;
   }
 </style>

@@ -1,31 +1,15 @@
 <template>
   <div class="login-main-container">
-    <nav class="navbar navbar-expand-lg">
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <img src="" alt="">
-      </div>
-    </nav>
     <div class="login-container">
-      <div class="row">
-        <div class="col-lg-6">
+      <div class="row" style="justify-content: center">
+        <div class="col-lg-4 col-md-8 col-sm-12">
           <login/>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-0 col-sm-0 mobile-side">
           <div style="padding: 20px">
             <img src="@/assets/images/others/2.png" alt="" height="500">
           </div>
         </div>
-      </div>
-    </div>
-    <div>
-      <img src="" alt="">
-      <h4>------------ Sign Up ---------------</h4>
-      <div class="row">
-        <div class="col-lg-6 br-1">
-          <sign-up />
-        </div>
-        <div class="col-lg-6 bl-1"></div>
       </div>
     </div>
   </div>
@@ -33,13 +17,11 @@
 
 <script>
 import Login from '@/components/Authentication/Login.vue'
-import SignUp from '@/components/Authentication/SignUp.vue'
 
 export default {
   name: 'Home',
   components: {
-    Login,
-    SignUp
+    Login
   }
 }
 </script>
@@ -48,8 +30,8 @@ export default {
 /* .login-main-container {
 } */
 .login-container {
-  background-image: linear-gradient(111deg, #9996ec 0%, #0616fb 84%);
-  height: 100vh;
+  background-image: linear-gradient(111deg, #615cdf 0%, #090f5e 84%);
+  min-height: 100vh;
   padding-top: 100px;
 }
 .navbar {
@@ -74,6 +56,11 @@ export default {
   }
   .bl-1 {
     border-left: 1px solid #30308b;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .mobile-side {
+    display: none;
   }
 }
 

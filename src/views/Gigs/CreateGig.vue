@@ -33,7 +33,7 @@
                     >
                   </div>
                   <div class="form-group row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 px-0">
                       <label class="label-large" for="category">Category</label>
                       <select
                         class="form-control custom-light-bg"
@@ -52,7 +52,7 @@
                         </option>
                       </select>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 px-0">
                       <label class="label-large" for="subcategory">
                         Sub-Category
                       </label>
@@ -74,7 +74,7 @@
                   </div>
                   <div class="form-group">
                     <label class="label-large" for="projectdescription">
-                      Describe your Project
+                      Description
                     </label>
                     <textarea
                       name="project"
@@ -82,6 +82,7 @@
                       id="projectdescription"
                       cols="30"
                       rows="5"
+                      placeholder="Describe your Project..."
                       v-model="gigForm.description"
                       required
                     ></textarea>
@@ -109,7 +110,7 @@
                     >
                       <input
                         v-model="gigForm.suggestions[index]"
-                        placeholder="Language..."
+                        placeholder="Suggestion..."
                         type="text"
                         class="form-control custom-light-bg py-0"
                         required

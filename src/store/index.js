@@ -305,11 +305,40 @@ export default new Vuex.Store({
         method: 'GET'
       })
     },
+    getPortfolios({ commit }) {
+      commit('Data', {})
+      return axios({
+        url: `/portfolios`,
+        method: 'GET'
+      })
+    },
     getPortfolio({ commit }, id) {
-      commit('setData', {})
+      commit('Data', {})
       return axios({
         url: `/portfolios/${id}`,
         method: 'GET'
+      })
+    },
+    getPortfoliosByCategory({commit}, id) {
+      commit('Data', {})
+      return axios({
+        url: `/portfolios/category/${id}`,
+        method: 'GET'
+      })
+    },
+    likePortfolio({ commit }, id) {
+      commit('Data', {})
+      return axios({
+        url: `/portfolios/like/${id}`,
+        method: 'PATCH'
+      })
+    },
+    commentOnPortfolio({ commit }, payload) {
+      commit('Data', {})
+      return axios({
+        url: '/comments',
+        method: 'POST',
+        data: payload
       })
     },
     createProject({ commit }, payload) {

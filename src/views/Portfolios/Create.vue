@@ -5,9 +5,19 @@
       <div class="row" style="justify-content: center">
         <div class="col-md-10 card-background">
           <form style="text-align: left;" @submit="onSubmit">
+            <div class="form-group card-background p-0" style="display: flex;">
+              <b-icon icon="building" class="field-icon"></b-icon>
+              <input
+                type="text"
+                class="form-control"
+                id="projectName"
+                v-model="form.projectName"
+                placeholder="Project Name"
+              />
+            </div>
             <div class="form-group row">
-              <div class="col-md-6">
-                <label class="label-large" for="category">Category</label>
+              <div class="col-md-6 card-background p-0" style="display: flex;">
+                <b-icon icon="building" class="field-icon"></b-icon>
                 <select
                   class="form-control custom-light-bg"
                   id="category"
@@ -16,6 +26,7 @@
                   @select="selectCategory"
                   required
                 >
+                  <option value="" disabled selected>Select your category</option>
                   <option
                     v-for="category in categories"
                     :key="category.title"
@@ -25,16 +36,18 @@
                   </option>
                 </select>
               </div>
-              <div class="col-md-6">
-                <label class="label-large" for="subcategory">
-                  Sub-Category
-                </label>
+              <div class="col-md-6 card-background p-0" style="display: flex;">
+                <b-icon icon="building" class="field-icon"></b-icon>
                 <select
                   class="form-control custom-light-bg"
                   id="subcategory"
                   v-model="form.subCategory"
                   required
                 >
+                  <option v-if="!form.category" value="" disabled selected>
+                    Select category first
+                  </option>
+                  <option v-else value="" disabled selected>Select your subcategory</option>
                   <option
                     v-for="subCategory in getSubCategory()"
                     :key="subCategory"
@@ -45,9 +58,46 @@
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label for="projectName">Project Name</label>
-              <input type="text" class="form-control" id="projectName" v-model="form.projectName" />
+            <div class="row mt-2">
+              <div class="form-group col-lg-3 col-md-6 col-sm-6 card-background p-0" style="display: flex">
+                <b-icon icon="building" class="field-icon"></b-icon>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="projectName"
+                  v-model="form.period.time"
+                  placeholder="Project Name"
+                />
+              </div>
+              <div class="form-group col-lg-3 col-md-6 col-sm-6 card-background p-0" style="display: flex;">
+                <b-icon icon="building" class="field-icon"></b-icon>
+                <select
+                  class="form-control custom-light-bg"
+                  id="subcategory"
+                  v-model="form.period.type"
+                  required
+                >
+                  <option value="" disabled selected>Select period type</option>
+                  <option value="Hours">Hours</option>
+                  <option value="Days">Days</option>
+                  <option value="Weeks">Weeks</option>
+                  <option value="Months">Months</option>
+                  <option value="Years">Years</option>
+                </select>
+              </div>
+              <div class="form-group col-lg-6 col-md-12 col-sm-12 card-background p-0" style="display: flex;">
+                <b-icon icon="building" class="field-icon"></b-icon>
+                <select
+                  class="form-control custom-light-bg"
+                  id="subcategory"
+                  v-model="form.clientType"
+                  required
+                >
+                  <option value="" disabled selected>Select client type</option>
+                  <option value="Texenn">Texenn</option>
+                  <option value="Personal">Personal</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
               <div class="card-background mb-4" style="display: block; text-align: center;">
@@ -71,9 +121,17 @@
                 <p>Upload Images/Videos</p>
               </div>
             </div>
-            <div class="form-group">
-              <label for="caption">Enter caption:</label>
-              <textarea class="form-control" id="caption" rows="3x" v-model="form.caption"></textarea>
+            <div class="form-group card-background p-0" style="display: flex;">
+              <b-icon icon="building" class="field-icon"></b-icon>
+              <textarea
+                class="form-control"
+                id="caption"
+                rows="3x"
+                maxlength="300"
+                placeholder="Describe your project (max 300 words)"
+                style="border: none; padding: 15px 10px;"
+                v-model="form.caption"
+              ></textarea>
             </div>
             <div class="form-group">
               <div class="card-background mb-4" style="display: block; text-align: center;">
@@ -98,9 +156,37 @@
                 <p>Upload Files</p>
               </div>
             </div>
+            <div class="form-group card-background p-0" style="display: flex;">
+              <b-icon icon="building" class="field-icon"></b-icon>
+              <input type="text" class="form-control" id="url" placeholder="URL" v-model="form.url"/>
+            </div>
+            <div class="form-group card-background p-0" style="display: flex;">
+              <b-icon icon="building" class="field-icon"></b-icon>
+              <b-form-tags
+                input-id="tags-separators"
+                v-model="form.technologies"
+                separator=" ,;"
+                placeholder="Enter new technology separated by space, comma or semicolon"
+                no-add-on-enter
+                input-class="inp"
+                required
+                style="border: none;"
+              ></b-form-tags>
+            </div>
             <div class="form-group">
-              <label for="url">Enter URL</label>
-              <input type="text" class="form-control" id="url" v-model="form.url"/>
+              <div class="card-background mb-4" style="display: block; text-align: center;">
+                <div v-if="form.imagesForCover.length > 0" class="row">
+                  <div v-for="image in form.imageVideos" :key="image.url" class="col-md-3">
+                    <img :src="image.url" alt="" height="80">
+                  </div>
+                </div>
+                <b-button
+                  @click="uploadCoverPhotos"
+                  style="height: 80px; width: 80px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.25); background: none;">
+                  <img src="@/assets/images/others/add-file.png" alt="">
+                </b-button>
+                <p>Images for Portfolio Cover</p>
+              </div>
             </div>
             <br /><br />
 
@@ -139,7 +225,14 @@ export default {
         projectName: '',
         caption: '',
         files: [],
-        url: ''
+        url: '',
+        imagesForCover: [],
+        technologies: [],
+        clientType: '',
+        period: {
+          time: 0,
+          type: ''
+        }
       }
     }
   },
@@ -218,6 +311,25 @@ export default {
       )
       return newWidget
     },
+    createCloudinaryWidgetForCover () {
+      const newWidget = window.cloudinary.createUploadWidget({
+        cloudName: 'storage96',
+        uploadPreset: 'texxen-portfolio-cover',
+        multiple: true,
+        clientAllowedFormats: ['png', 'jpeg', 'jpg']
+      },
+      (error, result) => {
+        if (!error && result && result.event === 'success') {
+          this.form.imagesForCover.push(result.info.url)
+        }
+      }
+      )
+      return newWidget
+    },
+    uploadCoverPhotos () {
+      const cloudinaryWidget = this.createCloudinaryWidgetForCover()
+      cloudinaryWidget.open()
+    },
     uploadImage () {
       const cloudinaryWidget = this.createCloudinaryWidget()
       cloudinaryWidget.open()
@@ -229,3 +341,22 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+input, select {
+  height: 50px;
+  border: none;
+  outline: none;
+}
+input:focus, select:focus {
+  outline: none;
+}
+.field-icon {
+  font-size: 22px;
+  margin: 15px 10px;
+}
+.inp {
+  border: none;
+  height: 50px;
+}
+</style>

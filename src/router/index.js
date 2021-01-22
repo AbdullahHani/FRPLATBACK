@@ -9,7 +9,12 @@ const routes = [
   {
     path: '/',
     name: 'Login',
-    component: () => import('@/views/Users/Auth.vue')
+    component: () => import('@/views/Users/Login.vue')
+  },
+  {
+    path: '/signup',
+    name: 'Login',
+    component: () => import('@/views/Users/Signup.vue')
   },
   // Dashboard View
   {
@@ -147,7 +152,7 @@ const routes = [
     component: () => import("@/Layouts/DashboardLayout"),
     children : [
       {
-      path: 'withdraw',
+      path: '',
       name:'Cash Withdraw',
       component: ()=> import('@/views/Wallet/Withdraw.vue')
       }
@@ -239,12 +244,39 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/feeds',
+    name: 'Feeds',
+    redirect: '/feeds',
+    component: () => import("@/Layouts/DashboardLayout"),
+    children : [
+      {
+        path: '',
+        name:'Feed List',
+        component: ()=> import('@/views/Feeds/index.vue')
+      }
+    ]
+  },
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+// const router = new VueRouter({
+//   mode: 'history',
+//   base: process.env.BASE_URL,
+//   routes
+// })
+
+const createRouter = () => new VueRouter({
+  // mode: 'history', // require service support
+  scrollBehavior: () => ({ y: 0 }),
+  routes: routes
 })
+
+const router = createRouter()
+
+// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
 
 export default router

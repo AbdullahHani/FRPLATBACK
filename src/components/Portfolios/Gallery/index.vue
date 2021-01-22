@@ -8,7 +8,7 @@
                 @click="viewMedia(media)"
             >
                 <div style="width: 200; height: 200;">
-                    <img v-if="media.extension !== 'mp4'" :src="media.url" alt="" style="max-height: 200px;">
+                    <img v-if="media.extension !== 'mp4'" :src="media.url" alt="" style="max-height: 100%; max-width: 100%;">
                     <img v-else src="@/assets/images/play.png" alt="" style="max-height: 200px;">
                 </div>
             </div>
