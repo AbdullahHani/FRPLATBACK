@@ -3,7 +3,12 @@
     <div class="container-fluid">
       <div class="container mb-5 card-background">
         <b-tabs v-model="tabIndex" content-class="mt-3" class="custom-bullet">
-          <b-progress :value="user.profileCompleted" :max="max" show-progress animated></b-progress>
+          <b-progress
+            :value="user.profileCompleted"
+            :max="max"
+            show-progress
+            animated
+          ></b-progress>
           <b-tab>
             <template #title>
               <p>
@@ -12,17 +17,39 @@
               </p>
             </template>
             <form @submit="updatePersonalInfo">
-              <div class="form-group"  style="text-align: left;">
-                <div class="card-background mt-2" style="display: block; text-align: center;">
+              <div class="form-group" style="text-align: left">
+                <div
+                  class="card-background mt-2"
+                  style="display: block; text-align: center"
+                >
                   <b-button
                     @click="uploadImage"
-                    style="height: 150px; width: 150px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.25); background: none;">
-                    <img v-if="personalInfo.avatar" :src="personalInfo.avatar" alt="" height="120">
-                    <img v-else src="@/assets/images/others/add-file.png" alt="">
+                    style="
+                      height: 150px;
+                      width: 150px;
+                      border-radius: 8px;
+                      border: 1px solid rgba(0, 0, 0, 0.25);
+                      background: none;
+                    "
+                  >
+                    <img
+                      v-if="personalInfo.avatar"
+                      :src="personalInfo.avatar"
+                      alt=""
+                      height="120"
+                    />
+                    <img
+                      v-else
+                      src="@/assets/images/others/add-file.png"
+                      alt=""
+                    />
                   </b-button>
                   <p>Upload Image</p>
                 </div>
-                <div class="card-background mt-2" style="display: flex; padding: 0">
+                <div
+                  class="card-background mt-2"
+                  style="display: flex; padding: 0"
+                >
                   <b-icon icon="person-fill" class="field-icon"></b-icon>
                   <input
                     type="text"
@@ -42,10 +69,13 @@
                     v-model="personalInfo.description"
                     required
                     placeholder="Enter your biography"
-                    style="border: none; outline: none;"
+                    style="border: none; outline: none"
                   ></textarea>
                 </div>
-                <div class="card-background mt-2" style="display: flex; padding: 0">
+                <div
+                  class="card-background mt-2"
+                  style="display: flex; padding: 0"
+                >
                   <b-icon icon="flag-fill" class="field-icon"></b-icon>
                   <input
                     type="text"
@@ -55,30 +85,34 @@
                     placeholder="Country"
                   />
                 </div>
-                <div class="card-background mt-2" style="display: flex; padding: 0">
+                <div
+                  class="card-background mt-2"
+                  style="display: flex; padding: 0"
+                >
                   <b-icon icon="calendar-date-fill" class="field-icon"></b-icon>
-                  <input
-                    type="text"
-                    class="form-control custom-light-bg"
+                  <datetime
                     v-model="personalInfo.dob"
-                    required
-                    placeholder="Date of birth"
-                  />
+                    type="date"
+                    input-class="form-control custom-light-bg inp"
+                    placeholder="Date of Birth"
+                  ></datetime>
                 </div>
-                <div class="card-background mt-2" style="display: flex; padding: 0">
+                <div
+                  class="card-background mt-2"
+                  style="display: flex; padding: 0"
+                >
                   <b-icon icon="person-fill" class="field-icon"></b-icon>
                   <input
                     type="text"
                     class="form-control custom-light-bg"
                     v-model="personalInfo.referral"
-                    required
                     placeholder="Referral"
                   />
                 </div>
                 <div
                   v-for="(language, index) in personalInfo.languages"
                   :key="index"
-                  style="display: flex;"
+                  style="display: flex"
                   class="mt-2 card-background p-0"
                 >
                   <b-icon icon="speaker-fill" class="field-icon"></b-icon>
@@ -92,24 +126,27 @@
                   <button
                     v-if="index !== 0"
                     class="mr-2"
-                    style="font-size: 24px; font-weight: 700; background: none; border: none; outline: none;"
+                    style="
+                      font-size: 24px;
+                      font-weight: 700;
+                      background: none;
+                      border: none;
+                      outline: none;
+                    "
                     @click="removeLanguage(index)"
                   >
                     -
                   </button>
                 </div>
                 <div class="mt-2">
-                  <b-button
-                    class="btn btn-info"
-                    @click="addLanguage()"
-                  >
-                    + <b-icon icon="speaker" style="font-size: 24px;"></b-icon>
+                  <b-button class="btn btn-info" @click="addLanguage()">
+                    + <b-icon icon="speaker" style="font-size: 24px"></b-icon>
                   </b-button>
                 </div>
                 <div
                   v-for="(interest, index) in personalInfo.interests"
                   :key="index"
-                  style="display: flex;"
+                  style="display: flex"
                   class="mt-2 card-background p-0"
                 >
                   <b-icon icon="trophy-fill" class="field-icon"></b-icon>
@@ -123,28 +160,35 @@
                   <button
                     v-if="index !== 0"
                     class="mr-2"
-                    style="font-size: 24px; font-weight: 700; background: none; border: none; outline: none;"
+                    style="
+                      font-size: 24px;
+                      font-weight: 700;
+                      background: none;
+                      border: none;
+                      outline: none;
+                    "
                     @click="removeInterest(index)"
                   >
                     -
                   </button>
                 </div>
                 <div class="mt-2">
-                  <b-button
-                    class="btn btn-info"
-                    @click="addInterest()"
-                  >
-                    + <b-icon icon="trophy" style="font-size: 24px;"></b-icon>
+                  <b-button class="btn btn-info" @click="addInterest()">
+                    + <b-icon icon="trophy" style="font-size: 24px"></b-icon>
                   </b-button>
                 </div>
                 <div align="right">
-                  <b-button
+                  <button
                     type="submit"
                     class="btn btn-success bg-darkblue"
-                    style="width: 120px;"
+                    style="
+                      background-color: #30308b;
+                      font-weight: 600;
+                      outline: none;
+                    "
                   >
                     Continue
-                  </b-button>
+                  </button>
                 </div>
               </div>
             </form>
@@ -157,14 +201,17 @@
                 Professional Info
               </p>
             </template>
-            <form @submit="updateProfessionalInfo" style="text-align: left;">
+            <form @submit="updateProfessionalInfo" style="text-align: left">
               <div
                 v-for="(occupation, index) in professionalInfo.occupations"
                 :key="index"
-                style="display: flex;"
+                style="display: flex"
                 class="mt-2 card-background p-0"
               >
-                <b-icon icon="arrow-right-circle-fill" class="field-icon"></b-icon>
+                <b-icon
+                  icon="arrow-right-circle-fill"
+                  class="field-icon"
+                ></b-icon>
                 <input
                   v-model="professionalInfo.occupations[index]"
                   placeholder="Occupation"
@@ -175,18 +222,25 @@
                 <button
                   v-if="index !== 0"
                   class="mr-2"
-                  style="font-size: 24px; font-weight: 700; background: none; border: none; outline: none;"
+                  style="
+                    font-size: 24px;
+                    font-weight: 700;
+                    background: none;
+                    border: none;
+                    outline: none;
+                  "
                   @click="removeOccupation(index)"
                 >
                   -
                 </button>
               </div>
               <div class="mt-2">
-                <b-button
-                  class="btn btn-info"
-                  @click="addOccupation()"
-                >
-                  + <b-icon icon="arrow-right-circle" style="font-size: 24px;"></b-icon>
+                <b-button class="btn btn-info" @click="addOccupation()">
+                  +
+                  <b-icon
+                    icon="arrow-right-circle"
+                    style="font-size: 24px"
+                  ></b-icon>
                 </b-button>
               </div>
               <div
@@ -194,7 +248,7 @@
                 :key="index"
                 class="row mt-2"
               >
-                <div class="card-background p-0 col-md-6" style="display: flex;">
+                <div class="card-background p-0 col-md-6" style="display: flex">
                   <b-icon icon="controller" class="field-icon"></b-icon>
                   <input
                     type="text"
@@ -204,7 +258,7 @@
                     required
                   />
                 </div>
-                <div class="card-background p-0 col-md-6" style="display: flex;">
+                <div class="card-background p-0 col-md-6" style="display: flex">
                   <b-icon icon="bar-chart-line" class="field-icon"></b-icon>
                   <select
                     placeholder="Experience Level"
@@ -219,7 +273,13 @@
                   <button
                     v-if="index !== 0"
                     class="mr-2"
-                    style="font-size: 24px; font-weight: 700; background: none; border: none; outline: none;"
+                    style="
+                      font-size: 24px;
+                      font-weight: 700;
+                      background: none;
+                      border: none;
+                      outline: none;
+                    "
                     @click="removeSkill(index)"
                   >
                     -
@@ -227,18 +287,16 @@
                 </div>
               </div>
               <div class="mt-2">
-                <b-button
-                  class="btn btn-info"
-                  @click="addSkill()"
-                >
-                  + <b-icon icon="controller" style="font-size: 24px;"></b-icon>
+                <b-button class="btn btn-info" @click="addSkill()">
+                  + <b-icon icon="controller" style="font-size: 24px"></b-icon>
                 </b-button>
               </div>
               <!-- Education -->
               <div
                 v-for="(education, index) in professionalInfo.educations"
                 :key="index"
-                class="row mt-2">
+                class="row mt-2"
+              >
                 <div class="card-background p-0 col-lg-4" style="display: flex">
                   <b-icon icon="book-fill" class="field-icon"></b-icon>
                   <input
@@ -271,7 +329,13 @@
                   <button
                     v-if="index !== 0"
                     class="mr-2"
-                    style="font-size: 24px; font-weight: 700; background: none; border: none; outline: none;"
+                    style="
+                      font-size: 24px;
+                      font-weight: 700;
+                      background: none;
+                      border: none;
+                      outline: none;
+                    "
                     @click="removeEducation(index)"
                   >
                     -
@@ -279,18 +343,18 @@
                 </div>
               </div>
               <div class="mt-2">
-                <b-button
-                  class="btn btn-info"
-                  @click="addEducation()"
-                >
-                  + <b-icon icon="book" style="font-size: 24px;"></b-icon>
+                <b-button class="btn btn-info" @click="addEducation()">
+                  + <b-icon icon="book" style="font-size: 24px"></b-icon>
                 </b-button>
               </div>
               <!-- Certificated -->
               <div
-                v-for="(certification, index) in professionalInfo.certifications"
+                v-for="(
+                  certification, index
+                ) in professionalInfo.certifications"
                 :key="index"
-                class="row mt-2">
+                class="row mt-2"
+              >
                 <div class="card-background p-0 col-lg-4" style="display: flex">
                   <b-icon icon="trophy-fill" class="field-icon"></b-icon>
                   <input
@@ -307,7 +371,9 @@
                     type="text"
                     placeholder="Certificate Institute"
                     class="form-control custom-light-bg"
-                    v-model="professionalInfo.certifications[index].certifiedFrom"
+                    v-model="
+                      professionalInfo.certifications[index].certifiedFrom
+                    "
                     required
                   />
                 </div>
@@ -323,7 +389,13 @@
                   <button
                     v-if="index !== 0"
                     class="mr-2"
-                    style="font-size: 24px; font-weight: 700; background: none; border: none; outline: none;"
+                    style="
+                      font-size: 24px;
+                      font-weight: 700;
+                      background: none;
+                      border: none;
+                      outline: none;
+                    "
                     @click="removeCertification(index)"
                   >
                     -
@@ -331,18 +403,19 @@
                 </div>
               </div>
               <div class="mt-2">
-                <b-button
-                  class="btn btn-info"
-                  @click="addCertification()"
-                >
-                  + <b-icon icon="trophy" style="font-size: 24px;"></b-icon>
+                <b-button class="btn btn-info" @click="addCertification()">
+                  + <b-icon icon="trophy" style="font-size: 24px"></b-icon>
                 </b-button>
               </div>
               <div align="right">
                 <b-button
                   type="submit"
                   class="btn btn-success bg-darkblue"
-                  style="width: 120px; margin-left: -60px;"
+                  style="
+                    background-color: #30308b;
+                    font-weight: 600;
+                    outline: none;
+                  "
                 >
                   Continue
                 </b-button>
@@ -365,10 +438,10 @@
                   <h3 class="display-7 head">
                     <strong>Linked Account</strong>
                   </h3>
-                  <h4 class="display-7 head">
+                  <!-- <h4 class="display-7 head">
                     Our first impression matters ! Create a new Profile and
                     Start earning now from the crowd here.
-                  </h4>
+                  </h4> -->
                   <hr class="border-blue m-0 mt-3" />
                   <h4 class="display-7 head mt-3">
                     <strong>Your Social Media Account</strong>
@@ -376,34 +449,42 @@
                 </div>
               </div>
 
-              <ul class="col-md-10 mt-2 mx-auto" style="list-style: none;">
-                <li>
-                  <i class="fab fa-google-plus-g"></i>
-                  Google
-                </li>
-                <li>
-                  <i class="fab fa-facebook"></i>
-                  Facebook
-                </li>
-                <li>
-                  <i class="fab fa-linkedin"></i>
-                  Linked In
-                </li>
-              </ul>
+              <div class="col-lg-6 col-md-8 col-sm-12 mt-2 mx-auto" style="list-style: none">
+                <button class="social-login facebook">
+                  <b-icon icon="facebook" style="font-size: 24px"></b-icon>
+                  Link your Facebook
+                </button>
+                <button class="social-login google">
+                  <b-icon icon="google" style="font-size: 24px"></b-icon>
+                  Link your Google Account
+                </button>
+                <button class="social-login linked-in">
+                  <b-icon icon="linkedin" style="font-size: 24px"></b-icon>
+                  Link your LinkedIn
+                </button>
+              </div>
 
-              <div class="col-md-10 mt-5 pl-5 ml-5">
+            </div>
+              <div align="right">
                 <b-button
                   @click="tabIndex++"
-                  class="btn btn-primary bg-darkblue"
-                  style="width: 120px; margin-left: -60px;"
+                  class="btn btn-success bg-darkblue"
+                  style="
+                    background-color: #30308b;
+                    font-weight: 600;
+                    outline: none;
+                  "
                 >
                   Continue
                 </b-button>
-                <b-button @click="tabIndex--" class="ml-3" style="color: darkblue;">
+                <b-button
+                  @click="tabIndex--"
+                  class="ml-3"
+                  style="color: white;"
+                >
                   <strong>Back</strong>
                 </b-button>
               </div>
-            </div>
           </b-tab>
           <b-tab>
             <template #title>
@@ -412,9 +493,7 @@
                 Account Security
               </p>
             </template>
-            <div
-              class="container card-background mt-4"
-            >
+            <div class="container card-background mt-4">
               <div class="container mb-5" style="width: 100%">
                 <div class="row">
                   <div class="col-md-10 mt-4 mx-auto">
@@ -422,21 +501,22 @@
                       <strong>Account Security</strong>
                     </h3>
                     <h4 class="display-7 head">
-                      Our first impression matters ! Create a new Profile
-                      and Start earning now from the crowd here.
+                      You would have access to your account security in your profile settings.
                     </h4>
 
                     <div class="col-md-10 mt-5 pl-5 ml-2">
                       <button
-                        @click="() => {
-                            $router.push('/feeds')
-                        }"
+                        @click="
+                          () => {
+                            $router.push('/feeds');
+                          }
+                        "
                         class="btn btn-primary bg-darkblue"
-                        style="width: 120px; margin-left: -60px;"
+                        style="width: 120px; margin-left: -60px"
                       >
                         Continue
                       </button>
-                      <a class="ml-3" style="color: darkblue;" href="#">
+                      <a class="ml-3" style="color: darkblue" href="#">
                         <strong>Back</strong>
                       </a>
                     </div>
@@ -453,14 +533,20 @@
 
 <script>
 import { mapState } from 'vuex'
+import { Datetime } from 'vue-datetime'
+import 'vue-datetime/dist/vue-datetime.css'
 export default {
+  name: 'CompleteProfile',
+  components: {
+    Datetime
+  },
   data() {
     return {
-      tabIndex: 1,
+      tabIndex: 0,
       max: 100,
       personalInfo: {
         country: '',
-        interests:[''],
+        interests: [''],
         dob: '',
         referral: '',
         name: '',
@@ -597,7 +683,7 @@ export default {
           }
         )
     },
-    createCloudinaryWidget () {
+    createCloudinaryWidget() {
       const newWidget = window.cloudinary.createUploadWidget({
         cloudName: 'storage96',
         uploadPreset: 'texennavatar',
@@ -606,15 +692,15 @@ export default {
         cropping: true,
         clientAllowedFormats: ['png', 'jpg', 'jpeg']
       },
-      (error, result) => {
-        if (!error && result && result.event === 'success') {
-          this.personalInfo.avatar = result.info.secure_url
+        (error, result) => {
+          if (!error && result && result.event === 'success') {
+            this.personalInfo.avatar = result.info.secure_url
+          }
         }
-      }
       )
       return newWidget
     },
-    uploadImage () {
+    uploadImage() {
       const cloudinaryWidget = this.createCloudinaryWidget()
       cloudinaryWidget.open()
     }
@@ -638,6 +724,24 @@ select {
   height: 50px;
   border: none;
 }
+.social-login {
+  width: 100%;
+  height: 55px;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+}
+.google {
+  background-color: #d30505;
+}
+.facebook {
+  background-color: #0066ff;
+}
+.linked-in {
+  background-color: #2433bb;
+}
 @media screen and (min-width: 768) {
   .custom-bullet {
     margin-left: 50px;
@@ -647,5 +751,14 @@ select {
   .custom-bullet {
     margin-left: 0;
   }
+}
+</style>
+
+<style lang="scss">
+.inp {
+  height: 50px;
+  border: none;
+  width: 100%;
+  outline: none;
 }
 </style>

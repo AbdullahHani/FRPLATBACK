@@ -51,9 +51,15 @@
         </div>
       </form>
       <p class="or">OR</p>
-      <button class="social-login facebook"><b-icon icon="facebook" style="font-size: 24px;"></b-icon> Signin with Facebook</button>
-      <button class="social-login google"><b-icon icon="google" style="font-size: 24px;"></b-icon> Signin with Google</button>
-      <button class="social-login linked-in"><b-icon icon="linkedin" style="font-size: 24px;"></b-icon> Signin with LinkedIn</button>
+      <button class="social-login facebook" @click="socialLogin('facebook')">
+        <b-icon icon="facebook" style="font-size: 24px;"></b-icon> Signin with Facebook
+      </button>
+      <button class="social-login google" @click="socialLogin('google')">
+        <b-icon icon="google" style="font-size: 24px;"></b-icon> Signin with Google
+      </button>
+      <button class="social-login linked-in" @click="socialLogin('linkedin')">
+        <b-icon icon="linkedin" style="font-size: 24px;"></b-icon> Signin with LinkedIn
+      </button>
     </div>
 </template>
 
@@ -106,7 +112,50 @@ export default {
             console.log(error.response.data)
           }
         )
-    }
+    },
+    socialLogin(network) {
+      if (network) {
+        return
+      }
+      return
+      // const hello = this.hello
+      // hello(network)
+      //   .login({
+      //     scope: 'email',
+      //     force: true
+      //   })
+      //   .then(() => {
+      //     // const authRes = hello(network).getAuthResponse()
+      //     hello(network)
+      //       .api('me')
+      //       .then(json => {
+      //         const profile = json
+      //         const {
+      //           email,
+      //           name,
+      //           first_name,
+      //           last_name,
+      //           picture
+      //         } = profile
+      //         const payload = {
+      //           email: email,
+      //           name: name,
+      //           firstName: first_name,
+      //           lastName: last_name,
+      //           avatar: picture,
+      //           authType: network
+      //         }
+      //         this.$store.dispatch('socialLogin', payload)
+      //           .then(response => {
+      //             this.$store.commit('currentUser', response.data.data)
+      //             this.$router.push('/dashboard')
+      //           })
+      //           .catch(error => {
+      //             this.notification(error.response.data, 'error')
+      //           })
+      //       })
+      //   })
+    },
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 10px;">
-    <div class="card-background">
+    <div class="card-background" style="min-height: 80vh;">
       <div align="right">
         <button
             class="add-portfolio"
@@ -9,7 +9,7 @@
             }"
         >+</button>
       </div>
-      <div class="row">
+      <div v-if="portfolios.length > 0" class="row">
         <div
             class="col-lg-4 col-md-12 col-sm-12"
             v-for="(portfolio, index) in portfolios"
@@ -19,6 +19,9 @@
                 :portfolio="portfolio"
             />
         </div>
+      </div>
+      <div v-else>
+        <p style="font-size: 22px; text-align: center;" class="pt-5">Be the one to add first portfolio.</p>
       </div>
     </div>
   </div>

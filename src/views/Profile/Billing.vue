@@ -14,11 +14,11 @@
                 to="/profile/security"
                 >Security</router-link
               >
-              <router-link
+              <!-- <router-link
                 class="nav-link navbar-link text-left"
                 to="/profile/notification"
                 >Notification</router-link
-              >
+              > -->
               <router-link
                 class="nav-link navbar-link text-left"
                 to="/profile/billing"

@@ -21,72 +21,49 @@
             reviews)
           </p>
           <div class="flex-container" style="justify-content: center">
-            <button class="profile-button btn-blue">Contact Me</button>
-            <button class="profile-button btn-white">Get a Quote</button>
+            <!-- <button class="profile-button btn-blue">Contact Me</button> -->
+            <!-- <button class="profile-button btn-white">Get a Quote</button> -->
           </div>
           <hr class="hr-span" />
+          <div align="left">
+            <div>
+              <h4 style="font-weight: 600; font-size: 16px;">Email</h4>
+              <p style="margin-left: 10px;">{{profileUser.email }}</p>
+            </div>
+            <div>
+              <h4 style="font-weight: 600; font-size: 16px;">Skills</h4>
+              <p
+                style="margin: 0 10px;"
+                v-for="skill in profileUser.skills"
+                :key="skill"
+              >
+                {{ skill.skill }} <span style="font-weight: 600; font-size: 12px;">({{ skill.experience }})</span>
+              </p>
+            </div>
+            <div>
+              <h4 style="font-weight: 600; font-size: 16px;">Languages</h4>
+              <p
+                style="margin: 0 10px;"
+                v-for="language in profileUser.languages"
+                :key="language"
+              >
+                {{ language }}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-lg-6">
-        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+        <div class="portfolio-container">
           <gig-card v-for="(gig, index) in gigs" :key="index" :gig="gig" />
         </div>
-        <div style="display: flex; flex-wrap: wrap">
-          <div
+        <div class="portfolio-container">
+          <portfolio-card
             v-for="portfolio in portfolios"
             :key="portfolio._id"
-            class="card-background mt-2 w-100"
-            @click="
-              () => {
-                $router.push(`/portfolio/${portfolio._id}`);
-              }
-            "
-          >
-            <p
-              style="
-                color: #0616fb;
-                font-size: 22px;
-                text-align: left;
-                font-weight: 700;
-              "
-            >
-              {{ portfolio.projectName }}
-            </p>
-            <div
-              class="ml-4 pl-2"
-              style="border-left: 5px solid #0616fb"
-              align="left"
-            >
-              <div>
-                <p class="mb-0 mt-0" style="font-size: 12px; font-weight: 700">
-                  Category
-                </p>
-                <p class="ml-5 mt-0 mb-0">{{ portfolio.category }}</p>
-              </div>
-              <div>
-                <p class="mb-0 mt-0" style="font-size: 12px; font-weight: 700">
-                  Sub Category
-                </p>
-                <p class="ml-5 mt-0 mb-0">{{ portfolio.subCategory }}</p>
-              </div>
-              <div>
-                <p class="mb-0 mt-0" style="font-size: 12px; font-weight: 700">
-                  Caption
-                </p>
-                <p class="ml-5 mt-0 mb-0">{{ portfolio.caption }}</p>
-              </div>
-              <div>
-                <p class="mb-0 mt-0" style="font-size: 12px; font-weight: 700">
-                  url
-                </p>
-                <p class="ml-5 mt-0 mb-0">
-                  <a :href="portfolio.url" target="_blank">{{
-                    portfolio.url
-                  }}</a>
-                </p>
-              </div>
-            </div>
-          </div>
+            :portfolio="portfolio"
+            style="max-width: 400px; min-width: 200px;"
+          />
         </div>
       </div>
     </div>
@@ -94,12 +71,14 @@
 </template>
 
 <script>
-import GigCard from '@/components/Dashboard/GigCard'
+import GigCard from '@/components/Dashboard/ProfileGigCard'
+import PortfolioCard from '@/components/Portfolios/Cards/Profile.vue'
 import { mapState } from 'vuex'
 export default {
   name: 'UserProfile',
   components: {
-    GigCard
+    GigCard,
+    PortfolioCard
   },
   data() {
     return {
@@ -114,12 +93,6 @@ export default {
     })
   },
   created() {
-    this.$store.dispatch('getUser', this.$route.params.id)
-      .then(
-        (response) => {
-          this.profileUser = response.data.data
-        }
-      )
     this.$store.dispatch('gigsByUsers', this.$route.params.id)
       .then(
         (response) => {
@@ -130,6 +103,15 @@ export default {
       .then(
         (response) => {
           this.portfolios = response.data.data
+        }
+      )
+  },
+  mounted() {
+    this.$store.dispatch('getUser', this.$route.params.id)
+      .then(
+        (response) => {
+          this.profileUser = response.data.data
+          console.log(response.data.data)
         }
       )
   }
@@ -222,6 +204,11 @@ export default {
   margin-top: 50px;
   box-shadow: 0px 2px 20px 0px;
 }
+.portfolio-container {
+  display: flex;
+  max-width: 100%;
+  overflow-x: scroll;
+}
 @media screen and (max-width: 768px) {
     .profile-card {
       margin-top: 130px
@@ -233,4 +220,27 @@ export default {
       margin-left: 40px;
     }
 }
+</style>
+
+<style lang="scss">
+    ::-webkit-scrollbar {
+        width: 2px !important;
+        height: 2px;
+    }
+
+        /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        width: 2px !important;
+    }
+        
+        /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+        /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    }
 </style>

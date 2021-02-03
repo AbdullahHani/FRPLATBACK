@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: left;">
+  <div style="text-align: left; min-height: 70vh;">
     <div class="container">
       <div class="container">
         <div class="row">
@@ -18,11 +18,11 @@
                 to="/profile/security"
                 >Security</router-link
               >
-              <router-link
+              <!-- <router-link
                 class="nav-link navbar-link text-left"
                 to="/profile/notification"
                 >Notification</router-link
-              >
+              > -->
               <router-link
                 class="nav-link navbar-link text-left"
                 to="/profile/billing"
@@ -47,7 +47,7 @@
                     disabled
                   />
                 </div>
-                <br /><br />
+                <!-- <br /><br />
                 <label class="label-large" for="gigTitle"
                   >Online Status <button class="notification-status-btn "></button>
                 </label>
@@ -70,9 +70,9 @@
                       Go Online For
                     </button>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="col-md-3 ml-auto">
+                <!-- <div class="col-md-3 ml-auto">
                   <button
                     type="submit"
                     class="btn btn-primary bg-darkblue"
@@ -80,14 +80,14 @@
                   >
                     Save Settings
                   </button>
-                </div>
+                </div> -->
               </div>
             </form>
             <br />
 
             <hr class="border-blue m-0" />
 
-            <label class="label-large" style="font-size: 30px" for=""
+            <!-- <label class="label-large" style="font-size: 30px" for=""
               >Account Deactivation
             </label>
             <label class="label-large" style="font-size: 20px" for=""
@@ -119,7 +119,7 @@
               <button type="submit" class="btn btn-primary bg-darkblue">
                 Submit
               </button>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>

@@ -64,9 +64,9 @@
                 <input
                   type="number"
                   class="form-control"
-                  id="projectName"
+                  id="projectTime"
                   v-model="form.period.time"
-                  placeholder="Project Name"
+                  placeholder="Time of Project"
                 />
               </div>
               <div class="form-group col-lg-3 col-md-6 col-sm-6 card-background p-0" style="display: flex;">
@@ -230,7 +230,7 @@ export default {
         technologies: [],
         clientType: '',
         period: {
-          time: 0,
+          time: null,
           type: ''
         }
       }

@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: left;">
+  <div style="text-align: left; min-height: 70vh;">
     <div class="container-fluid">
       <div class="container">
         <div class="row">
@@ -15,11 +15,11 @@
                 to="/profile/security"
                 >Security</router-link
               >
-              <router-link
+              <!-- <router-link
                 class="nav-link navbar-link text-left"
                 to="/profile/notification"
                 >Notification</router-link
-              >
+              > -->
               <router-link
                 class="nav-link navbar-link text-left"
                 to="/profile/billing"
@@ -50,7 +50,7 @@
                   </div>
                   <div class="row ml-1">
                     <label class="label-large">New Password </label>
-                    <div class="dandt lower" style="margin-left: 22px">
+                    <div class="dandt lower" style="margin-left: 19px">
                       <input
                         type="password"
                         class="form-control ml-4"
@@ -89,7 +89,7 @@
               </form>
               <hr class="border-blue mt-3 w-120" />
             </div>
-            <div class="bgcl card-background mt-4">
+            <!-- <div class="bgcl card-background mt-4">
               <div class="row ml-5 pt-2">
                 <div class="col-4"><strong>Phone Varifiction</strong></div>
                 <div class="col-6 ml-5">
@@ -118,8 +118,8 @@
                 </div>
               </div>
               <hr class="border-blue mt-2 pl-2 col-md-6 w-80" />
-            </div>
-            <div class="card-background mt-4">
+            </div> -->
+            <!-- <div class="card-background mt-4">
               <div>
                 <strong>Connected Devices</strong>
               </div>
@@ -136,7 +136,7 @@
                   ><img class="float-left pl-2" src="@/assets/images/others/Group 104.png"
                 /></button>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

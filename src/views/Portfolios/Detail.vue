@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" v-if="portfolio.likes">
+  <div class="container-fluid">
     <div class="card-background" align="left">
       <h1 class="display-5 head" style="color: #30308b; font-weight: 900">{{ portfolio.projectName }}</h1>
       <div v-if="user._id !== portfolio.user._id" class="mt-2 mb-5" style="display: flex; justify-content: flex-end;">
@@ -45,6 +45,12 @@
                 ></b-carousel-slide>
               </b-carousel>
             </div>
+              <div class="mt-4">
+                  <h4 style="font-weight: 600; font-size: 16px;">Seller</h4>
+                  <router-link :to="'/profile/' + portfolio.user._id" class="float-right"> Visit Profile</router-link>
+                  <p>{{ portfolio.user.name }}</p>
+                  <hr />
+              </div>
               <div class="mt-4">
                   <h4 style="font-weight: 600; font-size: 16px;">Caption</h4>
                   <p>{{ portfolio.caption }}</p>
@@ -97,13 +103,16 @@
             </div>
           </div>
       </div>
-      <div class="row">
-        <div
-          class="col-lg-4 col-md-12 col-sm-12"
-          v-for="rPortfolio in relatedPortfolios"
-          :key="rPortfolio._id"
-        >
-          <portfolio-card :portfolio="rPortfolio" />
+      <div v-if="relatedPortfolios.length > 0">
+        <h4 style="font-weight: 600; font-size: 16px;">Related Portfolios</h4>
+        <div class="row">
+          <div
+            class="col-lg-4 col-md-12 col-sm-12"
+            v-for="rPortfolio in relatedPortfolios"
+            :key="rPortfolio._id"
+          >
+            <portfolio-card :portfolio="rPortfolio" />
+          </div>
         </div>
       </div>
     </div>

@@ -118,7 +118,7 @@
                                         Profile Settings
                                     </router-link>
                                 </div>
-                                <div class="dropdown-item" align="left">
+                                <!-- <div class="dropdown-item" align="left">
                                     <router-link
                                         class="nav-link navbar-link"
                                         to="/help&support"
@@ -126,7 +126,7 @@
                                     >
                                         Help & Support
                                     </router-link>
-                                </div>
+                                </div> -->
                                 <!-- <div class="dropdown-item">
                                     <b-form-checkbox v-model="checked" name="check-button" switch @change="switchProfile">
                                         <b>{{ user.role === 'Buyer' ? 'Switch to Seller' : 'Switch to Buyer' }}</b>

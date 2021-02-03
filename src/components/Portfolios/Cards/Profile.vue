@@ -62,8 +62,6 @@
                 </div>
             </div>
         </div>
-        <div class="profile-avatar-container"></div>
-        <img class="profile-avatar" :src="portfolio.user.avatar" />
     </div>
 </template>
 

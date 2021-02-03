@@ -23,18 +23,19 @@
                       </b-button>
                       <p>Upload Image</p>
                     </div>
-                  <div class="form-group">
-                    <label class="label-large" for="gigTitle">Gig Title</label>
+                  <div class="form-group card-background p-0" style="display: flex;">
+                    <b-icon icon="arrow-right-circle-fill" class="field-icon"></b-icon>
                     <input
                       name="gig"
                       class="form-control custom-light-bg py-0"
                       v-model="gigForm.title"
+                      placeholder="Title"
                       required
                     >
                   </div>
                   <div class="form-group row">
-                    <div class="col-md-6 px-0">
-                      <label class="label-large" for="category">Category</label>
+                    <div class="col-md-6 card-background p-0" style="display: flex;">
+                      <b-icon icon="list" class="field-icon"></b-icon>
                       <select
                         class="form-control custom-light-bg"
                         id="category"
@@ -43,6 +44,7 @@
                         @select="selectCategory"
                         required
                       >
+                        <option value="" disabled selected>Select your category</option>
                         <option
                           v-for="category in categories"
                           :key="category.title"
@@ -52,16 +54,18 @@
                         </option>
                       </select>
                     </div>
-                    <div class="col-md-6 px-0">
-                      <label class="label-large" for="subcategory">
-                        Sub-Category
-                      </label>
+                    <div class="col-md-6 card-background p-0" style="display: flex;">
+                      <b-icon icon="list" class="field-icon"></b-icon>
                       <select
                         class="form-control custom-light-bg"
                         id="subcategory"
                         v-model="gigForm.subCategory"
                         required
                       >
+                        <option v-if="!gigForm.category" value="" disabled selected>
+                          Select category first
+                        </option>
+                        <option v-else value="" disabled selected>Select your subcategory</option>
                         <option
                           v-for="subCategory in getSubCategory()"
                           :key="subCategory"
@@ -72,65 +76,66 @@
                       </select>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="label-large" for="projectdescription">
-                      Description
-                    </label>
+                  <div class="form-group card-background p-0 mt-3" style="display: flex;">
+                    <b-icon icon="list" class="field-icon"></b-icon>
                     <textarea
                       name="project"
-                      class="form-control custom-light-bg py-0"
+                      class="form-control custom-light-bg p-3"
                       id="projectdescription"
                       cols="30"
                       rows="5"
-                      placeholder="Describe your Project..."
+                      style="border: none; ouline: none;"
+                      placeholder="Describe your Gig. Starts with 'I will'"
                       v-model="gigForm.description"
                       required
                     ></textarea>
                   </div>
-                  <div class="form-group">
-                    <label class="label-large" for="tags">Tags</label>
+                  <div class="form-group card-background p-0" style="display: flex;">
+                    <b-icon icon="list" class="field-icon"></b-icon>
                     <b-form-tags
                       input-id="tags-separators"
+                      input-class="inp"
                       v-model="gigForm.tags"
                       separator=" ,;"
                       placeholder="Enter new tags separated by space, comma or semicolon"
                       no-add-on-enter
                       required
+                      style="border: none;"
                     ></b-form-tags>
                   </div>
-                  <div class="form-group">
-                    <label class="label-large" for="suggestions">
-                      Suggestions
-                    </label>
-                    <div
-                      v-for="(suggestion, index) in gigForm.suggestions"
-                      :key="index"
-                      style="display: flex;"
-                      class="mt-2"
+                  <div
+                    v-for="(suggestion, index) in gigForm.suggestions"
+                    :key="index"
+                    style="display: flex"
+                    class="mt-2 card-background p-0"
+                  >
+                    <b-icon icon="speaker-fill" class="field-icon"></b-icon>
+                    <input
+                      v-model="gigForm.suggestions[index]"
+                      placeholder="Suggestion (ex: Provide Designs)"
+                      type="text"
+                      class="form-control custom-light-bg py-0"
+                      required
+                    />
+                    <button
+                      v-if="index !== 0"
+                      class="mr-2"
+                      style="
+                        font-size: 24px;
+                        font-weight: 700;
+                        background: none;
+                        border: none;
+                        outline: none;
+                      "
+                      @click="removeSuggestion(index)"
                     >
-                      <input
-                        v-model="gigForm.suggestions[index]"
-                        placeholder="Suggestion..."
-                        type="text"
-                        class="form-control custom-light-bg py-0"
-                        required
-                      />
-                      <button
-                        v-if="index !== 0"
-                        style="border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 50%; padding: 0 15px; margin: 0 10px;"
-                        @click="removeSuggestion(index)"
-                      >
-                        -
-                      </button>
-                    </div>
-                    <div class="mt-2">
-                      <b-button
-                        class="btn btn-success"
-                        @click="addSuggestion()"
-                      >
-                        Add Suggestion
-                      </b-button>
-                    </div>
+                      -
+                    </button>
+                  </div>
+                  <div class="mt-2">
+                    <b-button class="btn btn-info" @click="addSuggestion()">
+                      + <b-icon icon="speaker" style="font-size: 24px"></b-icon>
+                    </b-button>
                   </div>
                   <b-button type="submit" class="btn btn-success float-right">
                     Continue
@@ -161,8 +166,8 @@
                             {{pricing.title}}
                           </p>
                         </div>
-                        <div class="form-group" align="center">
-                          <label class="label-large" for="gigTitle">Price</label>
+                        <div class="form-group card-background p-0" style="display: flex;" align="center">
+                          <b-icon icon="clock" class="field-icon"></b-icon>
                           <input
                             name="price"
                             type="number"
@@ -180,18 +185,19 @@
                             v-for="(service, serviceIndex) in pricings[index].services"
                             :key="serviceIndex"
                             style="display: flex;"
-                            class="row ml-1"
+                            class="card-background p-0"
                           >
+                            <b-icon icon="tool-box" class="field-icon"></b-icon>
                             <input
                               v-model="pricings[index].services[serviceIndex]"
                               placeholder="Service..."
                               type="text"
-                              class="form-control custom-light-bg mt-1 col-md-10 col-sm-9"
+                              class="form-control custom-light-bg"
                               required
                             />
                             <b-button
                               v-if="serviceIndex !== 0"
-                              style="border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 50%; padding: 4px 15px;"
+                              style="font-size: 24px; font-weight: 700; background: none; border: none; outline: none; color: black;"
                               @click="removeService(index, serviceIndex)"
                             >
                               -
@@ -225,7 +231,6 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      user: '',
       gigId: '',
       tabIndex: 0,
       selectedCategory: {},
@@ -236,7 +241,7 @@ export default {
         picture: '',
         description: '',
         tags: [],
-        suggestions: []
+        suggestions: ['']
       },
       categories: [],
       pricings: [
@@ -349,4 +354,21 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+input, select {
+  height: 50px;
+  border: none;
+  outline: none;
+}
+input:focus, select:focus {
+  outline: none;
+}
+.field-icon {
+  font-size: 22px;
+  margin: 15px 10px;
+}
+.inp {
+  border: none;
+  height: 50px;
+}
+</style>

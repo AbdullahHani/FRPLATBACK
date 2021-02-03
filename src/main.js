@@ -5,6 +5,9 @@ import store from './store'
 import axios from 'axios'
 // import jQuery from 'jquery'
 
+import HelloJs from 'hellojs/dist/hello.all.min.js'
+import VueHello from 'vue-hellojs'
+
 axios.defaults.baseURL = 'http://localhost:5000/api'
 // axios.defaults.baseURL = 'https://texxen-be.herokuapp.com/api'
 // axios.defaults.baseURL = process.env.VUE_APP_BASE_API || 'https://texxen-backend.herokuapp.com/api'
@@ -33,6 +36,15 @@ import VueChatScroll from 'vue-chat-scroll'
 Vue.use(VueChatScroll)
 
 Vue.config.productionTip = false
+
+HelloJs.init({
+  google: '728650461347-egeero1vvj0kisrivl3pkd570clplfgc.apps.googleusercontent.com',
+  facebook: '289336138367806',
+  linkedin: '785mb9vyrwfvg1'
+}, {
+  redirect_uri: 'authcallback/'
+})
+Vue.use(VueHello, HelloJs)
 
 new Vue({
   router,
