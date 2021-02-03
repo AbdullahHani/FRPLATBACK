@@ -8,8 +8,10 @@ import axios from 'axios'
 import HelloJs from 'hellojs/dist/hello.all.min.js'
 import VueHello from 'vue-hellojs'
 
-axios.defaults.baseURL = 'http://localhost:5000/api'
+// axios.defaults.baseURL = 'http://localhost:5000/api'
 // axios.defaults.baseURL = 'https://texxen-be.herokuapp.com/api'
+axios.defaults.baseURL = 'https://texxen.herokuapp.com/api'
+
 // axios.defaults.baseURL = process.env.VUE_APP_BASE_API || 'https://texxen-backend.herokuapp.com/api'
 axios.defaults.headers.common.Authorization = localStorage.getItem('token')
 
