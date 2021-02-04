@@ -62,7 +62,7 @@
             v-for="portfolio in portfolios"
             :key="portfolio._id"
             :portfolio="portfolio"
-            style="max-width: 400px; min-width: 200px;"
+            style="max-width: 400px; min-width: 400px;"
           />
         </div>
       </div>

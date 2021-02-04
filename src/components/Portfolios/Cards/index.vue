@@ -6,7 +6,7 @@
         }"
     >
         <div class="card-background" style="padding: 0;">
-            <div style="min-height: 200px; background-color: white;">
+            <div style="min-height: 250px; background-color: white;">
                 <b-carousel
                     id="carousel-fade"
                     style="text-shadow: 0px 0px 2px #000;"
@@ -34,9 +34,9 @@
                     </div>
                 </b-carousel>
             </div>
-            <div align="left" style="padding: 10px 10px 0px 10px; height: 150px;">
+            <div align="left" style="padding: 10px 10px 0px 10px; height: 175px;">
                 <p style="font-weight: 700;">{{ portfolio.projectName }}</p>
-                <p align="justify" style="font-size: 14px;">{{ portfolio.caption }}</p>
+                <p align="justify" style="font-size: 14px; text-overflow: ellipsis;">{{ portfolio.caption }}</p>
             </div>
             <hr style="margin-bottom: 5px;"/>
             <div align="left" style="padding: 10px;">
@@ -63,6 +63,7 @@
             </div>
         </div>
         <div class="profile-avatar-container"></div>
+        <div class=""></div>
         <img class="profile-avatar" :src="portfolio.user.avatar" />
     </div>
 </template>
@@ -96,6 +97,7 @@ export default {
   top: -33px;
   left: -34px;
   border: 10px solid #0616fb;
+  background-color: #fff;
 }
 .profile-avatar {
     max-height: 100px;

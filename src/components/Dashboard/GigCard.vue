@@ -14,7 +14,7 @@
         class="avatar"
         src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg"
         alt=""
-        style="height: 100%;"
+        style="height: 100%; max-height: 305px;"
       >
     </div>
     <div style="display: flex;">

@@ -20,8 +20,8 @@
             />
         </div>
       </div>
-      <div v-else>
-        <p style="font-size: 22px; text-align: center;" class="pt-5">Be the one to add first portfolio.</p>
+      <div v-else-if="portfolios.length === 0">
+        <p v-if="showEmptyMessage" style="font-size: 22px; text-align: center;" class="pt-5">Be the one to add first portfolio.</p>
       </div>
     </div>
   </div>
@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       categorizedGigs: [],
-      portfolios: []
+      portfolios: [],
+      showEmptyMessage: false
     }
   },
   computed: {
@@ -52,6 +53,9 @@ export default {
       .then(
         (response) => {
           this.portfolios = response.data.data
+          if (this.portfolios.length === 0) {
+            this.showEmptyMessage = true
+          }
         }
       )
   }

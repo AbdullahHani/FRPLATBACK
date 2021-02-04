@@ -11,6 +11,7 @@
             v-model="login.email"
             placeholder="Email"
             style="height: 50px;"
+            @click="handleError"
             required
           />
         </div>
@@ -23,12 +24,14 @@
             v-model="login.password"
             placeholder="Password"
             style="height: 50px;"
+            @click="handleError"
             required
           />
           <button type="button" @click="showPassword = !showPassword" style="background: none; outline: none; border: none;">
             <b-icon :icon="showPassword ? 'eye' : 'eye-fill'" style="font-size: 22px; margin: 15px 10px;"></b-icon>
           </button>
         </div>
+        <p v-if="error" style="color: red; text-align: center">{{ error }}</p>
         <div style="display: flex; justify-content: space-between;">
           <p style="padding-top: 10px;">
             <router-link
@@ -75,7 +78,8 @@ export default {
         email: "",
         password: ""
       },
-      showPassword: false
+      showPassword: false,
+      error: ''
     };
   },
   computed: {
@@ -109,7 +113,11 @@ export default {
         )
         .catch(
           (error) => {
-            console.log(error.response.data)
+            const res = error.response.data
+            this.error = res.errEmail || res.errPassword
+            if (res.message) {
+              this.makeToast(res)
+            }
           }
         )
     },
@@ -156,6 +164,16 @@ export default {
       //       })
       //   })
     },
+    handleError() {
+      this.error = ''
+    },
+    makeToast(data) {
+      this.$bvToast.toast(data.message, {
+        title: data.status,
+        autoHideDelay: 3000,
+        appendToast: false
+      })
+    }
   }
 };
 </script>
@@ -172,7 +190,7 @@ input {
 }
 .or::before {
   content: '';
-  width: 150px;
+  width: 30%;
   height: 2px;
   background: #30308b;
   display: inline-block;
@@ -180,7 +198,7 @@ input {
 }
 .or::after {
   content: '';
-  width: 150px;
+  width: 30%;
   height: 2px;
   background: #30308b;
   display: inline-block;
