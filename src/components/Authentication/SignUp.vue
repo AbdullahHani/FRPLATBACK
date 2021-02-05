@@ -142,14 +142,14 @@
     </form>
     <p class="or">OR</p>
     <button class="social-login facebook">
-      <b-icon icon="facebook" style="font-size: 24px"></b-icon> Signin with
+      <b-icon icon="facebook" style="font-size: 24px"></b-icon> Sign In with
       Facebook
     </button>
     <button class="social-login google">
-      <b-icon icon="google" style="font-size: 24px"></b-icon> Signin with Google
+      <b-icon icon="google" style="font-size: 24px"></b-icon> Sign In with Google
     </button>
     <button class="social-login linked-in">
-      <b-icon icon="linkedin" style="font-size: 24px"></b-icon> Signin with
+      <b-icon icon="linkedin" style="font-size: 24px"></b-icon> Sign In with
       LinkedIn
     </button>
   </div>

@@ -55,13 +55,13 @@
       </form>
       <p class="or">OR</p>
       <button class="social-login facebook" @click="socialLogin('facebook')">
-        <b-icon icon="facebook" style="font-size: 24px;"></b-icon> Signin with Facebook
+        <b-icon icon="facebook" style="font-size: 24px;"></b-icon> Sign In with Facebook
       </button>
       <button class="social-login google" @click="socialLogin('google')">
-        <b-icon icon="google" style="font-size: 24px;"></b-icon> Signin with Google
+        <b-icon icon="google" style="font-size: 24px;"></b-icon> Sign In with Google
       </button>
       <button class="social-login linked-in" @click="socialLogin('linkedin')">
-        <b-icon icon="linkedin" style="font-size: 24px;"></b-icon> Signin with LinkedIn
+        <b-icon icon="linkedin" style="font-size: 24px;"></b-icon> Sign In with LinkedIn
       </button>
     </div>
 </template>
